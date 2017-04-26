@@ -12,8 +12,13 @@ const client = redis.createClient(config.get('redis'));
 const _ = require('lodash');
 const MongoConnection = require('../common/MongoConnection');
 const Utils = require('../common/Utils');
+const EmailUtils = require('../email/EmailUtils');
 
 router.get('/', function *() {
+    this.redirect('user/login' + this.search);
+});
+
+router.get('/user/login', function *() {
     let token = this.session.token;
     let account = yield client.getAsync('token-' + token);
     let default_system = config.get('sso.default_system');
@@ -92,26 +97,55 @@ router.post('/api/user/login', function *() {
 
         let db = MongoConnection.get('boom');
         account = yield db.collection('accounts').findOne({ username: username });
-        if (account) {
-            if (account.password == password) {
-                if (account.validDate) {
-                    client.del('token-' + token);
-                    token = yield generateToken(account);
-                    let code = yield generateCode(token);
-                    this.session.token = token;
 
-                    this.body = { status: true, result: code };
-
-                } else {
-                    this.body = { status: false, message: '请您登录邮箱完成校验!' };
-                }
-            } else {
-                this.body = { status: false, message: '密码不正确!' };
-            }
-        } else {
+        if (!account) {
             this.body = { status: false, message: '该用户名还没有注册!' };
+            return;
         }
+
+        if (account.password !== password) {
+            this.body = { status: false, message: '密码不正确!' };
+            return;
+        }
+
+        if (!account.validDate) {
+            this.body = { status: false, message: '请您登录邮箱完成校验!' };
+            return;
+        }
+
+        client.del('token-' + token);
+        token = yield generateToken(account);
+        let code = yield generateCode(token);
+        this.session.token = token;
+
+        this.body = { status: true, result: code };
     }
+});
+
+router.post('/api/user/sendForgetPasswordEmail', function *() {
+    let data = yield parse(this);
+    let email = data.email;
+
+    let db = MongoConnection.get('boom');
+    let account = yield db.collection('account').findOne({ username: email });
+
+    if (!account) {
+        this.body = { status: false, message: '该邮箱还没有注册!' };
+        return;
+    }
+
+    if (!account.validDate) {
+        this.body = { status: false, message: '请您登录邮箱完成校验!' };
+        return;
+    }
+
+    let validCode = Utils.random();
+    let validUrl = '';
+    yield db.collection('account').update({ _id: account._id }, { $set: { validCode: validCode } });
+
+    EmailUtils.sendEmail(email, 'forget-password.template.html', { url: validUrl });
+
+    this.body = { status: true };
 });
 
 function * generateCode(token) {

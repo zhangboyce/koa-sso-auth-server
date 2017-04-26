@@ -22,7 +22,12 @@ function encodePassword() {
 }
 
 function _config() {
-   console.log(config.list());
+   var config = require('config');
+   console.log('NODE_ENV: ' + config.util.getEnv('NODE_ENV'));
+   console.log('NODE_CONFIG_DIR: ' + config.util.getEnv('NODE_CONFIG_DIR'));
+   console.log('NODE_CONFIG: ' + config.util.getEnv('NODE_CONFIG'));
+   console.log('HOSTNAME: ' + config.util.getEnv('HOSTNAME'));
+   console.log('NODE_APP_INSTANCE: ' + config.util.getEnv('NODE_APP_INSTANCE'));
 }
 
 _config();

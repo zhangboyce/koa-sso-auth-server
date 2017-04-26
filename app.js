@@ -6,6 +6,7 @@ const render = require('koa-swig');
 const session = require('koa-generic-session');
 const redisStore = require('koa-redis');
 const config = require('config');
+const KoaRouter = require('koa-router')();
 
 const app = koa();
 app.context.render = render({
@@ -31,10 +32,15 @@ app.use(session({
 // routers
 const apiRouter = require('./server_routers/api.router.js');
 app.use(apiRouter.routes()).use(apiRouter.allowedMethods());
-app.use(logger());
 
 app.use(require('koa-static')(path.join(__dirname, 'build')));
 app.use(require('koa-static-server')({rootDir: 'public', rootPath: '/public'}));
+
+// route the path to render index
+KoaRouter.get("/*", function *() {
+    yield this.render('index');
+});
+app.use(KoaRouter.routes()).use(KoaRouter.allowedMethods());
 
 const MongoConnection = require('./common/MongoConnection');
 MongoConnection.connect(config.get('mongo.boom'), 'boom');
@@ -42,3 +48,4 @@ MongoConnection.connect(config.get('mongo.boom'), 'boom');
 let port = config.get('port');
 app.listen(port);
 console.log('cce-ato-sso listening on port ' + port);
+console.log('HOSTNAME: ' + config.util.getEnv('HOSTNAME'));

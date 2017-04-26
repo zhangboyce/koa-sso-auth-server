@@ -1,8 +1,8 @@
 'use strict';
 
 import React, { Component } from 'react';
-import Footer from './layout/Footer.jsx';
-import Header from './layout/Header.jsx';
+import Footer from './common/Footer.jsx';
+import Header from './common/Header.jsx';
 
 export default class App extends Component {
     render () {

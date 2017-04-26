@@ -17,15 +17,27 @@ function md5ByString(str) {
     return md5.digest('hex');
 }
 
-function isUrl(url) {
-    if (!url) return false;
-
-    let exp = /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
-    let regex = new RegExp(exp);
-
-    return url.match(regex) ? true : false;
+function testRegex(target, re) {
+    if (!target || !re) return false;
+    return re.test(target);
 }
 
-module.exports = { isUrl, random, md5ByString, salt };
+function isUrl(url) {
+    let re = /[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi;
+    return testRegex(url, re);
+}
 
-console.log(isUrl('127.0.0.1:18888/api/getToken'));
+function isEmail(email) {
+    let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return testRegex(email, re);
+}
+
+function isPassword(password) {
+    // 至少包含一个数字和一个字母,且长度不少于6位
+    let re = /^(?=.*[A-Za-z])(?=.*\d)[\d\D]{6,}$/;
+    return testRegex(password, re);
+}
+
+module.exports = { isPassword, isEmail, isUrl, random, md5ByString, salt };
+
+console.log(isPassword('121211^w'));

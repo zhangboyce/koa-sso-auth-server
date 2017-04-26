@@ -14,31 +14,84 @@ body {
     margin: 36px -14px 0 -14px ;
 }
 
-.login-container {
+.user-container {
     text-align: center;
 }
 
-.login-container .row .col-sm-3 {
+.user-container .row .col-sm-3 {
     display: inline-block;
     float: none;
 }
 
-.login-container .row.logo {
+.user-container .row.logo {
     margin-bottom: 50px;
 }
 
-.login-container .row.username,
-.login-container .row.password {
+.user-container .row.email,
+.user-container .row.password {
     margin-bottom: 20px;
 }
 
-.login-container .row.username span ,
-.login-container .row.password span {
+.user-container .row.email span ,
+.user-container .row.password span {
     font-size: 12px;
     color: rgb(244, 92, 66);
 }
 
-.login-container .row.submit button {
+.user-container .row.submit button {
     background-color: rgb(87, 104, 252);
     width: 100%;
+}
+
+.user-container .row.password .forget-password {
+    position: absolute;
+    right: 32px;
+    top: 10px;
+}
+
+.user-container .row.password .forget-password a {
+    color: rgb(169, 166, 163);
+}
+
+.user-container .row.password .forget-password a:hover {
+    color: rgb(107, 107, 107);
+    text-decoration: none;
+}
+
+.user-container .row.register span {
+    position: absolute;
+    top: -10px;
+    font-size: 14px;
+    color: rgb(169, 166, 163);
+}
+
+.user-container .row.register span:first-child {
+    left: 20px;
+}
+
+.user-container .row.register span:last-child {
+    right: 20px;
+}
+
+.user-container .row {
+    position: relative;
+}
+
+.user-container .row span.msg {
+    position: absolute;
+    left: 62%;
+    top: 10px;
+}
+
+.user-container .row span.msg i {
+    font-size: 18px;
+    margin-right: 4px;
+}
+
+.user-container .row span.msg i.fa-check-circle {
+    color: rgb(63, 189, 148);
+}
+
+.user-container .row span.msg i.fa-times-circle {
+    color: rgb(244, 92, 66);
 }

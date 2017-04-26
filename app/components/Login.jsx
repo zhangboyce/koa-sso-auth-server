@@ -1,27 +1,27 @@
 'use strict';
 
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import Utils from '../../common/Utils';
+import RowEmail from './common/RowEmail.jsx';
+import RowPassword from './common/RowPassword.jsx';
+import RowSubmit from './common/RowSubmit.jsx';
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            username_msg: '',
-            password_msg: ''
-        };
+        this.state = { msg: '' };
     }
 
-    handleLogin =()=>{
-        let username = this.refs.username.value;
-        let uvr = this.validateUsername(username);
-        if (!uvr) return;
+    handleLogin = () => {
+        let ev = this.refs.email.validate();
+        let pv = this.refs.password.validate();
+        if (!ev || !pv) return;
 
-        let password = this.refs.password.value;
-        let pvr = this.validatePassword(password);
-        if (!pvr) return;
+        let username = this.refs.email.val;
+        let password = this.refs.password.val;
+
         password = Utils.md5ByString(password + Utils.salt);
-
         let auth_callback = this.props.location.query.auth_callback;
         $.post('/api/user/login', { username, password }, json => {
             if (json.status) {
@@ -31,58 +31,24 @@ export default class Login extends Component {
                     location.href = window.CONFIG['default_system'];
                 }
             } else {
-                this.setState({ password_msg: json.message });
+                this.setState({ msg: json.message });
             }
         });
     };
 
-    validateUsername = name => {
-        console.log('name: ' + name);
-        if(!name || name.trim() == '') {
-            this.setState({ username_msg: '用户名不能为空!' });
-            return false;
-        } else {
-            this.setState({ username_msg: '' });
-            return true;
-        }
-        // TODO validate username format
-    };
-
-    validatePassword = password => {
-        if(!password || password.trim() == '') {
-            this.setState({ password_msg: '密码不能为空!' });
-            return false;
-        } else {
-            this.setState({ password_msg: '' });
-            return true;
-        }
-    };
-
     render () {
         return (
-            <div className="column login-container">
-                <div className="row logo">
+            <div>
+                <RowEmail ref="email"/>
+                <RowPassword ref="password"/>
+                <RowSubmit onSubmit={ this.handleLogin } name="登录" msg={ this.state.msg }/>
+
+                <div className="row register">
                     <div className="col-sm-3">
-                        <img src="http://boom-static.static.cceato.com/boom/imgs/login-logo-2.gif"/>
-                        <br/>
-                        <img src="http://boom-static.static.cceato.com/boom/imgs/login-title.png" width="100"/>
-                    </div>
-                </div>
-                <div className="row username">
-                    <div className="col-sm-3">
-                        <input name="username" onBlur={ e => { this.validateUsername(e.target.value) } } ref="username" type="email" className="form-control" placeholder="用户名"/>
-                        <span>{ this.state.username_msg }</span>
-                    </div>
-                </div>
-                <div className="row password">
-                    <div className="col-sm-3">
-                        <input name="password" onBlur={ e => { this.validatePassword(e.target.value) } } ref="password" type="password" className="form-control" placeholder="密码"/>
-                        <span>{ this.state.password_msg }</span>
-                    </div>
-                </div>
-                <div className="row submit">
-                    <div className="col-sm-3">
-                        <button className="btn btn-primary" onClick={ this.handleLogin }>登录</button>
+                        <span>还没有账号?</span>
+                        <span>
+                            <Link to="/user/register">注册新账号</Link>
+                        </span>
                     </div>
                 </div>
             </div>
