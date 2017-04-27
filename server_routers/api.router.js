@@ -53,30 +53,44 @@ router.get('/api/code/check', function *() {
     if (code) {
         let token = yield client.getAsync('code-' + code);
         if(!token) {
-            this.body = { status: false, message: 'code已过期, 请重新获取。' };
+            this.body = { status: false, message: 'code已过期, 请重新获取' };
             return;
         }
         let account = yield client.getAsync('token-' + token);
         if (!account) {
-            this.body = { status: false, message: 'token已过期, 请重新登录。' };
+            this.body = { status: false, message: 'token已过期, 请重新登录' };
             return;
         }
         this.body = { status: true, result: token };
 
     } else {
-        this.body = { status: false, message: '没有找到code.' };
+        this.body = { status: false, message: '没有找到code' };
     }
 });
 
 router.get('/api/token/check', function *() {
     let token = this.query.token;
     if (!token) {
-        this.body = { status: false, message: '没有找到token.' };
+        this.body = { status: false, message: '没有找到token' };
         return;
     }
     let account = yield client.getAsync('token-' + token);
     if(!account) {
-        this.body = { status: false, message: 'token已过期, 请重新登录。' };
+        this.body = { status: false, message: 'token已过期, 请重新登录' };
+        return;
+    }
+    this.body = { status: true };
+});
+
+router.get('/api/getUserInfo', function *() {
+    let token = this.query.token;
+    if (!token) {
+        this.body = { status: false, message: '没有找到token' };
+        return;
+    }
+    let account = yield client.getAsync('token-' + token);
+    if(!account) {
+        this.body = { status: false, message: 'token已过期, 请重新登录' };
         return;
     }
     this.body = { status: true, result: account };
@@ -104,7 +118,7 @@ router.post('/api/user/login', function *() {
         }
 
         if (account.password !== password) {
-            this.body = { status: false, message: '密码不正确!' };
+            this.body = { status: false, message: '用户名或密码不正确!' };
             return;
         }
 
