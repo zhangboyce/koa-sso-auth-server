@@ -34,7 +34,7 @@ export default class RowEmail extends Component {
         return (
             <div className="row email">
                 <div className="col-sm-3">
-                    <input name="email" ref="email" onBlur={ this.validate } type="text" className="form-control" placeholder="输入您注册的邮箱地址"/>
+                    <input name="email" ref="email" onBlur={ this.validate } type="text" className="form-control" placeholder={ this.props.placeholder || '输入您注册的邮箱地址' }/>
                 </div>
                 <MsgSpan msg={ this.state.msg } validated={ this.state.validated }/>
             </div>

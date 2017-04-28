@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import Utils from '../../common/Utils';
+import Utils from '../../../common/Utils';
 
 export default class Register extends Component {
     constructor(props) {

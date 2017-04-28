@@ -20,7 +20,7 @@ app.use(function *(next) {
         yield next;
     }catch(e) {
         console.error(e);
-        this.body = { status: false, message: 'System internal error!' }
+        this.body = { status: false, message: '系统内部错误,请联系管理员!' }
     }
 });
 
@@ -43,9 +43,9 @@ KoaRouter.get("/*", function *() {
 app.use(KoaRouter.routes()).use(KoaRouter.allowedMethods());
 
 const MongoConnection = require('./common/MongoConnection');
-MongoConnection.connect(config.get('mongo.boom'), 'boom');
-
-let port = config.get('port');
-app.listen(port);
-console.log('cce-ato-sso listening on port ' + port);
-console.log('HOSTNAME: ' + config.util.getEnv('HOSTNAME'));
+MongoConnection.connect(config.get('mongo.boom'), 'boom', () => {
+    let port = config.get('port');
+    app.listen(port);
+    console.log('cce-ato-sso listening on port ' + port);
+    console.log('HOSTNAME: ' + config.util.getEnv('HOSTNAME'));
+});

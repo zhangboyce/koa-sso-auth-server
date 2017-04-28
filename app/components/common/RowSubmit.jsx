@@ -1,16 +1,42 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react'
+import MsgSpan from './MsgSpan.jsx';
 
 export default class RowSubmit extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = { validated: false };
+    }
+
+    handleClick = e => {
+        let name = '';
+        let $this = $(e.target);
+        this.props.onSubmit(() => {
+
+            name = $this.html();
+            let loadingText = $this.attr('data-loading-text');
+            $this.html(loadingText);
+            $this.attr('disabled', true);
+
+        }, () => {
+            $this.removeAttr('disabled');
+            $this.html(name);
+        });
+
+        this.setState({ validated: true });
+    };
 
     render() {
         return (
             <div className="row submit">
                 <div className="col-sm-3">
-                    <button className="btn btn-primary" onClick={ this.props.onSubmit }>{ this.props.name }</button>
+                    <button type="button" className="btn btn-primary"
+                            onClick={ this.handleClick }
+                            data-loading-text={'<i class="fa fa-spinner fa-spin" />    ' + this.props.loadingName}>{ this.props.name }</button>
                 </div>
-                <span className="msg">{ this.props.msg }</span>
+                <MsgSpan msg={ this.props.msg } validated={ this.state.validated } />
             </div>
         );
     }
@@ -19,5 +45,6 @@ export default class RowSubmit extends Component {
 RowSubmit.propTypes = {
     msg: PropTypes.string,
     name: PropTypes.string.isRequired,
+    loadingName: PropTypes.string,
     onSubmit: PropTypes.func.isRequired
 };

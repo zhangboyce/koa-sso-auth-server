@@ -35,10 +35,8 @@ export default class RowPassword extends Component {
         return (
             <div className="row password">
                 <div className="col-sm-3">
-                    <span className="forget-password">
-                            <Link to="/user/resetPassword">忘记密码?</Link>
-                        </span>
-                    <input name="password" ref="password" onBlur={this.validate  } type="password" className="form-control" placeholder="密码"/>
+                    { this.props.children }
+                    <input name="password" ref="password" onBlur={this.validate  } type="password" className="form-control" placeholder={ this.props.placeholder || '密码' }/>
                 </div>
                 <MsgSpan msg={ this.state.msg } validated={ this.state.validated }/>
             </div>

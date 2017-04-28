@@ -2,10 +2,10 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import Utils from '../../common/Utils';
-import RowEmail from './common/RowEmail.jsx';
-import RowPassword from './common/RowPassword.jsx';
-import RowSubmit from './common/RowSubmit.jsx';
+import Utils from '../../../common/Utils';
+import RowEmail from './../common/RowEmail.jsx';
+import RowPassword from './../common/RowPassword.jsx';
+import RowSubmit from './../common/RowSubmit.jsx';
 
 export default class Login extends Component {
     constructor(props) {
@@ -23,9 +23,10 @@ export default class Login extends Component {
 
         password = Utils.md5ByString(password + Utils.salt);
         let auth_callback = this.props.location.query.auth_callback;
+        console.log('auth_callback: ' + typeof auth_callback);
         $.post('/api/user/login', { username, password }, json => {
             if (json.status) {
-                if (auth_callback) {
+                if (auth_callback && auth_callback != 'undefined') {
                     location.href = auth_callback + '?code=' + json.result;
                 } else {
                     location.href = window.CONFIG['default_system'];
@@ -40,7 +41,11 @@ export default class Login extends Component {
         return (
             <div>
                 <RowEmail ref="email"/>
-                <RowPassword ref="password"/>
+                <RowPassword ref="password">
+                    <span className="forget-password">
+                        <Link to="/user/sendForgetPasswordEmail">忘记密码?</Link>
+                    </span>
+                </RowPassword>
                 <RowSubmit onSubmit={ this.handleLogin } name="登录" msg={ this.state.msg }/>
 
                 <div className="row register">
