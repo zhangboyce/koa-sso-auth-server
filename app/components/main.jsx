@@ -10,6 +10,7 @@ import SendForgetPasswordEmail from './user/SendForgetPasswordEmail.jsx';
 import UserContainer from './user/UserContainer.jsx';
 import Register from './user/Register.jsx';
 import ResetPassword from './user/ResetPassword.jsx';
+import ResetPasswordOk from './user/ResetPasswordOk.jsx';
 
 ReactDOM.render(
     <Router history={ browserHistory }>
@@ -20,6 +21,7 @@ ReactDOM.render(
                 <Route path="sendForgetPasswordEmail" component={ SendForgetPasswordEmail }/>
                 <Route path="register" component={ Register }/>
                 <Route path="resetPassword" component={ ResetPassword }/>
+                <Route path="resetPasswordOk" component={ ResetPasswordOk }/>
             </Route>
         </Route>
     </Router>, document.getElementById('main'));

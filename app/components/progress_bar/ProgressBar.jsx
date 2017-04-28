@@ -1,31 +1,43 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import './progress-bar.css';
 
 export default class ProgressBar extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render () {
 
-        const { list, current } = this.props;
+        const { steps, current } = this.props;
 
-        let xxoo = i => {
-            if (i < current) return 'passed';
-            else if (i === current) return 'active';
-            else return '';
-        };
+        let className = i => (i < current) ? 'passed': (i === current) ? 'active' : '';
+        let stepsComps = [];
+        steps.forEach((step, index) => {
+            stepsComps.push (
+                <li className={ className(index + 1) }>
+                    <div>
+                        <i>{ index + 1 }</i>
+                        <p>{ step }</p>
+                    </div>
+                    {
+                        (index != steps.length - 1 ) && <i />
+                    }
+                </li>
+            );
+        });
 
         return (
-            <div>
-                <ul>
-                    { list.each ( l => {
-                        return <li className={ xxoo(0) } />
-                    }) }
-                </ul>
+            <div className="progress-bar-container">
+                {
+                    stepsComps && stepsComps.length != 0 &&
+                    <ul>
+                        { stepsComps }
+                    </ul>
+                }
             </div>
         );
     }
 }
+
+ProgressBar.propTypes = {
+    steps: PropTypes.array.isRequired,
+    current: PropTypes.number.isRequired
+};

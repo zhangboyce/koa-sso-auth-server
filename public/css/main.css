@@ -92,3 +92,9 @@ body {
 .user-container .row span.msg i.fa-times-circle {
     color: rgb(244, 92, 66);
 }
+
+.user-container .row.progress-bar > div {
+    float: inherit;
+    display: inline-block;
+    margin-bottom: 50px;
+}

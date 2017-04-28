@@ -5,6 +5,7 @@ import Utils from '../../../common/Utils';
 import RowPassword from './../common/RowPassword.jsx';
 import RowRePassword from './../common/RowRePassword.jsx';
 import RowSubmit from './../common/RowSubmit.jsx';
+import RowProgressBar from './../common/RowProgressBar.jsx';
 
 export default class ResetPassword extends Component {
     constructor(props) {
@@ -27,8 +28,7 @@ export default class ResetPassword extends Component {
         $.post('/api/user/resetPassword', { password, code }, json => {
             this.setState({ msg: json.message });
             if (json.status) {
-                alert("密码修改成功,返回首页登录。");
-                location.href="/user/login";
+                location.href="/user/resetPasswordOk";
             }
         });
     };
@@ -37,6 +37,7 @@ export default class ResetPassword extends Component {
         console.log();
         return (
             <div>
+                <RowProgressBar current={ 2 }/>
                 <RowPassword ref="password" placeholder="新密码"/>
                 <RowRePassword ref="rePassword"/>
                 <RowSubmit onSubmit={ this.handleUpdatePassword } name="修改密码" msg={ this.state.msg }/>

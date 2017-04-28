@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import RowSubmit from './../common/RowSubmit.jsx';
 import RowEmail from './../common/RowEmail.jsx';
-import ProgressBar from './../progress_bar/ProgressBar.jsx';
+import RowProgressBar from './../common/RowProgressBar.jsx';
 
 export default class SendForgetPasswordEmail extends Component {
     constructor(props) {
@@ -36,7 +36,7 @@ export default class SendForgetPasswordEmail extends Component {
 
         return (
             <div>
-                <ProgressBar />
+                <RowProgressBar current={ 1 }/>
                 <RowEmail ref="email"/>
                 <RowSubmit onSubmit={ this.handleSendEmail } loadingName="正在发送... ..." name={ name } msg={ this.state.msg }/>
             </div>

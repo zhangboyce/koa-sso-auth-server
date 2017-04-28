@@ -1,4 +1,77 @@
-span {
-    font-size: 20px;
-    color: red;
+.progress-bar-container {
+    /*background-color: rgb(245, 245, 245);*/
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.progress-bar-container > ul {
+    text-align: center;
+    list-style: none;
+    margin: 0;
+    border: 0;
+}
+
+.progress-bar-container > ul > li {
+    position: relative;
+    display: inline-block;
+}
+
+.progress-bar-container > ul > li > div {
+    text-align: center;
+    position: relative;
+    float: left;
+    min-width: 56px;
+    height: 50px;
+    line-height: 30px;
+    vertical-align: middle;
+}
+
+.progress-bar-container > ul > li > div > i {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    font-style: inherit;
+    line-height: 28px;
+    color: #fff;
+    background-image: url(/public/images/common.png);
+    background-position: 0 -442px;
+    background-repeat: no-repeat;
+}
+
+.progress-bar-container > ul > li.active > div > i,
+.progress-bar-container > ul > li.passed > div > i {
+    background-position: 0 -404px;
+    background-repeat: no-repeat;
+    background-image: url(/public/images/common.png);
+}
+
+.progress-bar-container > ul > li > div > p {
+    position: relative;
+    top: 12px;
+    font-size: 14px;
+    /*font-weight: 700;*/
+    line-height: 20px;
+    margin-top: -8px;
+    color: #a5a5a5;
+}
+
+.progress-bar-container > ul > li > i {
+    float: left;
+    width: 220px;
+    height: 2px;
+    margin-top: 14px;
+    vertical-align: middle;
+    background-color: #ededed;
+}
+
+.progress-bar-container > ul > li.passed > i {
+    background-color: #2f86f6;
+}
+
+.progress-bar-container > ul > li.active > i {
+    background-image: url(/public/images/common.png);
+    background-position: 0 -392px;
+    background-repeat: no-repeat;
 }
