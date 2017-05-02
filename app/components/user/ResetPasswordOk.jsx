@@ -12,7 +12,7 @@ export default class ResetPasswordOk extends Component {
                 <div className="row">
                     <div className="col-sm-3">
                         <h3>恭喜你! 密码找回成功!</h3>
-                        <Link to="user/login">返回首页登录</Link>
+                        <Link to="/user/login">返回首页登录</Link>
                     </div>
                 </div>
             </div>

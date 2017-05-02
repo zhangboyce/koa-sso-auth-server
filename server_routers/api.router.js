@@ -153,7 +153,7 @@ router.post('/api/user/sendForgetPasswordEmail', function *() {
     }
 
     let validCode = Utils.random();
-    let validUrl = config.get('host') + '/user/toResetPassword?code=' + validCode;
+    let validUrl = config.get('host') + '/user/resetPassword?code=' + validCode;
     yield db.collection('accounts').update({ _id: account._id }, { $set: { validCode: validCode } });
 
     yield EmailUtils.sendEmail(email, 'forget-password.template.html', { url: validUrl });
@@ -162,7 +162,7 @@ router.post('/api/user/sendForgetPasswordEmail', function *() {
     this.body = { status: true };
 });
 
-router.get('/user/toResetPassword', function *() {
+router.get('/user/resetPassword', function *() {
     let code = this.query.code;
     if (!code) {
         this.body = '<script>alert("别闹...我错了");location.href="/user/login";</script>';
@@ -178,7 +178,8 @@ router.get('/user/toResetPassword', function *() {
         this.body = ('<script>alert("请先通过邮箱校验");location.href="/user/login";</script>');
         return;
     }
-    this.redirect('/user/resetPassword?code='+ code );
+    yield this.render('index');
+
 });
 
 
@@ -208,6 +209,87 @@ router.post('/api/user/resetPassword', function *() {
     this.body = { status: true };
 });
 
+router.post('/api/user/register', function *() {
+    let data = yield parse(this);
+    let email = data.email;
+    let password = data.password;
+
+    let db = MongoConnection.get('boom');
+    let account = yield db.collection('accounts').findOne({ username: email });
+    if (account) {
+        this.body = { status: false, message: '该邮箱已被注册' };
+        return;
+    }
+
+    let validCode = Utils.random();
+    yield db.collection('accounts').insert({ username: email, password: password, dateCreated: new Date(), validCode: validCode });
+
+    let validUrl = config.get('host') + '/api/user/valid?code=' + validCode + '&email=' + email;
+    yield EmailUtils.sendEmail(email, 'register-valid.template.html', { url: validUrl});
+    this.body = { status: true };
+
+});
+
+router.get('/user/registerOk', function *() {
+    let email = this.query.email;
+
+    let db = MongoConnection.get('boom');
+    let account = yield db.collection('accounts').findOne({ username: email });
+    if (!account) {
+        this.body = '<script>alert("邮箱没有被注册");location.href="/user/login";</script>';
+    }
+    yield this.render('index');
+});
+
+router.post('/api/user/sendRegisterValidEmail', function *() {
+    let data = yield parse(this);
+    let email = data.email;
+
+    if (!email) {
+        this.body = { status: false, message: '找不到邮箱地址' };
+        return;
+    }
+
+    let db = MongoConnection.get('boom');
+    let account = yield db.collection('accounts').findOne({ username: email });
+    if (!account) {
+        this.body = { status: false, message: '该邮箱没有注册' };
+        return;
+    }
+
+    if (account.validDate) {
+        this.body = { status: false, message: '该邮箱已通过验证' };
+        return;
+    }
+
+    let validCode = Utils.random();
+    let validUrl = config.get('host') + '/api/user/valid?code=' + validCode + '&email=' + email;
+
+    yield db.collection('accounts').updateOne({ _id: account._id}, { $set: { validCode: validCode } });
+    yield EmailUtils.sendEmail(email, 'register-valid.template.html', { url: validUrl });
+    this.body = { status: true };
+
+});
+
+router.get('/api/user/valid', function *() {
+    let code = this.query.code;
+    let email = this.query.email;
+
+    let db = MongoConnection.get('boom');
+    let account = yield db.collection('accounts').findOne({ validCode: code });
+    if (account) {
+        if (account.validDate) {
+            this.body = '<script>alert("您已经通过注册校验");location.href="/user/login";</script>';
+        }else {
+            yield db.collection('accounts').update({ _id: account._id }, { $set: { validDate : new Date() }});
+            this.body = '<script>alert("您已经通过注册校验,请登录");location.href="/user/login";</script>';
+        }
+    }else {
+        let redirectUrl = '/user/registerOk?email=' + email;
+        this.body = '<script>alert("链接已过期,请重新发送");location.href="' + redirectUrl +'";</script>';
+    }
+});
+
 function * generateCode(token) {
     let code = Utils.random();
     yield client.setAsync('code-' + code, token);
@@ -220,106 +302,5 @@ function * generateToken(account) {
     yield client.setAsync('token-' + token, JSON.stringify(account));
     return token;
 }
-
-
-//router.post('/register', function *() {
-//    let data = yield parse(this);
-//    let username = data.username;
-//    let password = data.password;
-//    let account = yield Account.findOne({username: username});
-//    if (account) {
-//        this.body = {status: 'fail', message: '该邮箱已注册'};
-//        return;
-//    }
-//    account = new Account({
-//        username: username,
-//        password: encodePassword(password),
-//        dateCreated: new Date(),
-//        validCode: idUtil.random()
-//    });
-//    yield account.save();
-//    yield emailUtil.sendMail(account.username, '[脑洞]邮件校验', config.get('host') + '/valid/' + account.validCode);
-//    this.body = {status: 'success'};
-//});
-//
-//router.get('/valid/:code', function *() {
-//    let code = this.params.code;
-//    let account = yield Account.findOne({validCode: code});
-//    if (account) {
-//        if (account.validDate) {
-//            this.body = '<script>alert("您已经通过注册校验");location.href="/login";</script>';
-//        }else {
-//            yield Account.update({_id: account._id}, {$set: {'validDate': new Date()}});
-//            this.body = '<script>alert("您已经通过注册校验,请登录");location.href="/login";</script>';
-//        }
-//    } else {
-//        this.body = '<script>alert("error");location.href="/login";</script>';
-//    }
-//});
-//
-//router.get('/forget', function *() {
-//    yield this.render('login/forget');
-//});
-//
-//router.post('/resetEmail', function *() {
-//    let data = yield parse(this);
-//    let email = data.email;
-//    let account = yield Account.findOne({username: email});
-//    if (account.validDate) {
-//        account.validCode = idUtil.random();
-//        yield account.save();
-//        yield emailUtil.sendMail(email, '[脑洞]重置密码', config.get('host') + '/resetPassword/' + account.validCode);
-//        this.body = ({status: 'success'});
-//        return;
-//    }
-//    this.body = {status: 'invalid'};
-//});
-//
-//router.get('/resetPassword/:code', function *() {
-//    let code = this.params.code;
-//    if (!code) {
-//        this.body = '<script>alert("别闹...我错了");location.href="/login";</script>';
-//        return;
-//    }
-//    let account = yield Account.findOne({validCode: code});
-//    if (!account) {
-//        this.body = ('<script>alert("链接已经失效");location.href="/login";</script>');
-//        return;
-//    }
-//    if (!account.validDate) {
-//        this.body = ('<script>alert("请先通过邮箱校验");location.href="/login";</script>');
-//        return;
-//    }
-//    yield this.render('login/resetPassword', {code: code});
-//});
-//
-//router.post('/resetUpdatePassword', function *() {
-//    let data = yield parse(this);
-//    let code = data.code;
-//    let password = data.password;
-//    if (!code || !password) {
-//        this.body = ('<script>alert("别闹...我错了");location.href="/login";</script>');
-//        return;
-//    }
-//    let account = yield Account.findOne({validCode: code});
-//    if (!account) {
-//        this.body = ('<script>alert("链接已经失效");location.href="/login";</script>');
-//        return;
-//    }
-//    if (!account.validDate) {
-//        this.body = ('<script>alert("请先通过邮箱校验");location.href="/login";</script>');
-//        return;
-//    }
-//    account.password = encodePassword(password);
-//    account.validCode = null;
-//    yield account.save();
-//    this.body = ({status: 'success'});
-//});
-//
-//router.get('/logout', function *() {
-//    this.session = null;
-//    this.redirect('/');
-//});
-
 
 module.exports = router;

@@ -9,6 +9,7 @@ import Welcome from './Welcome.jsx';
 import SendForgetPasswordEmail from './user/SendForgetPasswordEmail.jsx';
 import UserContainer from './user/UserContainer.jsx';
 import Register from './user/Register.jsx';
+import RegisterOk from './user/RegisterOk.jsx';
 import ResetPassword from './user/ResetPassword.jsx';
 import ResetPasswordOk from './user/ResetPasswordOk.jsx';
 
@@ -20,6 +21,7 @@ ReactDOM.render(
                 <Route path="login" component={ Login } />
                 <Route path="sendForgetPasswordEmail" component={ SendForgetPasswordEmail }/>
                 <Route path="register" component={ Register }/>
+                <Route path="registerOk" component={ RegisterOk }/>
                 <Route path="resetPassword" component={ ResetPassword }/>
                 <Route path="resetPasswordOk" component={ ResetPasswordOk }/>
             </Route>

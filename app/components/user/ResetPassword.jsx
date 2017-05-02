@@ -23,8 +23,6 @@ export default class ResetPassword extends Component {
         password = Utils.md5ByString(password + Utils.salt);
         let code = this.props.location.query.code;
 
-        console.log('code: ' + code);
-
         $.post('/api/user/resetPassword', { password, code }, json => {
             this.setState({ msg: json.message });
             if (json.status) {
@@ -34,7 +32,6 @@ export default class ResetPassword extends Component {
     };
 
     render () {
-        console.log();
         return (
             <div>
                 <RowProgressBar current={ 2 }/>

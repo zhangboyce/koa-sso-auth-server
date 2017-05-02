@@ -18,7 +18,7 @@ body {
     text-align: center;
 }
 
-.user-container .row .col-sm-3 {
+.user-container .row > div {
     display: inline-block;
     float: none;
 }
@@ -97,4 +97,18 @@ body {
     float: inherit;
     display: inline-block;
     margin-bottom: 50px;
+}
+
+.user-container .row.register-ok p {
+    color: rgb(244, 92, 66);
+}
+
+.user-container .row.register-ok p i {
+    font-size: 18px;
+    margin-right: 4px;
+}
+
+.user-container .row.register-ok h4 i {
+    font-style: inherit;
+    color: rgb(168, 168, 168);
 }

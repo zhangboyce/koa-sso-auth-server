@@ -23,7 +23,7 @@ export default class Login extends Component {
 
         password = Utils.md5ByString(password + Utils.salt);
         let auth_callback = this.props.location.query.auth_callback;
-        console.log('auth_callback: ' + typeof auth_callback);
+
         $.post('/api/user/login', { username, password }, json => {
             if (json.status) {
                 if (auth_callback && auth_callback != 'undefined') {
