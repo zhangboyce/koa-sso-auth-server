@@ -34,20 +34,12 @@
     font-style: inherit;
     line-height: 28px;
     color: #fff;
-    background:
-            rgb(254, 254, 254)
-            url(/public/images/common.png)
-            no-repeat
-            0 -442px;
+    .i-background(-442px)
 }
 
 .progress-bar-container > ul > li.active > div > i,
 .progress-bar-container > ul > li.passed > div > i {
-    background:
-            rgb(254, 254, 254)
-            url(/public/images/common.png)
-            no-repeat
-            0 -404px;
+    .i-background(-404px)
 }
 
 .progress-bar-container > ul > li > div > p {
@@ -73,9 +65,9 @@
 }
 
 .progress-bar-container > ul > li.active > i {
-    background:
-            rgb(254, 254, 254)
-            url(/public/images/common.png)
-            no-repeat
-            0 -392px;
+    .i-background(-392px)
+}
+
+.i-background(@top) {
+    background: rgb(254, 254, 254) url(/public/images/common.png) no-repeat 0 @top;
 }

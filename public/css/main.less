@@ -1,0 +1,99 @@
+@error-msg-color: rgb(244, 92, 66);
+@success-msg-color: rgb(63, 189, 148);
+
+body {
+  background-color: rgb(254,254,254);
+}
+
+.header {
+  text-align: center;
+  padding: 20px 0;
+  margin: 0 -15px;
+  font-size: 56px;
+  text-shadow: -5px 5px 0 rgba(0,0,0,0.1);
+}
+
+.footer {
+  margin: 36px -14px 0 -14px ;
+}
+
+.user-container {
+  text-align: center;
+  .row {
+    position: relative;
+    &.logo { margin-bottom: 50px; }
+    &.email { margin-bottom: 20px; }
+    &.password {
+      margin-bottom: 20px;
+      .forget-password {
+        position: absolute;
+        font-size: 12px;
+        right: 32px;
+        top: 10px;
+        a {
+          color: rgb(169, 166, 163);
+          &:hover {
+            color: rgb(107, 107, 107);
+            text-decoration: none;
+          }
+        }
+      }
+    }
+
+    &.submit {
+      button {
+        background-color: rgb(87, 104, 252);
+        width: 100%;
+      }
+    }
+
+    &.register {
+      span {
+        position: absolute;
+        top: -10px;
+        font-size: 14px;
+        color: rgb(169, 166, 163);
+        &:first-child { left: 20px; }
+        &:last-child { right: 20px; }
+      }
+    }
+
+    span {
+      &.msg {
+        position: absolute;
+        left: 62%;
+        top: 10px;
+        font-size: 12px;
+        color: @error-msg-color;
+
+        i {
+          font-size: 18px;
+          margin-right: 4px;
+          &.fa-check-circle { color: @success-msg-color; }
+          &.fa-times-circle { color: @error-msg-color; }
+        }
+      }
+    }
+
+    &.register-ok {
+      p {
+        color: @error-msg-color;
+        i {
+          font-size: 18px;
+          margin-right: 4px;
+        }
+      }
+      h4 {
+        i {
+          font-style: inherit;
+          color: rgb(168, 168, 168);
+        }
+      }
+    }
+
+    > div {
+      display: inline-block;
+      float: none;
+    }
+  }
+}
