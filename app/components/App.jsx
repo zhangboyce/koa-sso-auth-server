@@ -7,7 +7,7 @@ import Header from './common/Header.jsx';
 export default class App extends Component {
     render () {
         return (
-            <div className="container-fluid">
+            <div className="container-fluid main">
                 <Header />
                 { this.props.children }
                 <Footer />

@@ -1,6 +1,6 @@
 {
-  "name": "cce-ato-activity-manager",
-  "version": "0.0.0",
+  "name": "cce-ato-sso",
+  "version": "0.0.1",
   "private": true,
   "main": "app.js",
   "babel": {

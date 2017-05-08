@@ -47,5 +47,4 @@ MongoConnection.connect(config.get('mongo.boom'), 'boom', () => {
     let port = config.get('port');
     app.listen(port);
     console.log('cce-ato-sso listening on port ' + port);
-    console.log('HOSTNAME: ' + config.util.getEnv('HOSTNAME'));
 });

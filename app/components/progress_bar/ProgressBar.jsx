@@ -5,7 +5,6 @@ import './progress-bar.css';
 
 export default class ProgressBar extends Component {
     render () {
-
         const { steps, current } = this.props;
 
         let className = i => (i < current) ? 'passed': (i === current) ? 'active' : '';
