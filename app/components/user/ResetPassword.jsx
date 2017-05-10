@@ -2,24 +2,22 @@
 
 import React, { Component } from 'react';
 import Utils from '../../../common/Utils';
-import RowPassword from './../common/RowPassword.jsx';
-import RowRePassword from './../common/RowRePassword.jsx';
+import RowInput from './../common/RowInput.jsx';
 import RowSubmit from './../common/RowSubmit.jsx';
 import RowProgressBar from './../common/RowProgressBar.jsx';
 
 export default class ResetPassword extends Component {
     constructor(props) {
         super(props);
-        this.state = { msg: '' }
+        this.state = { msg: '', password: '' }
     }
 
     handleUpdatePassword = () => {
         let pv = this.refs.password.validate();
-        let password = this.refs.password.val;
-
-        let rpv = this.refs.rePassword.validate(password);
+        let rpv = this.refs.rePassword.validate();
         if (!pv || !rpv) return;
 
+        let password = this.refs.password.val;
         password = Utils.md5ByString(password + Utils.salt);
         let code = this.props.location.query.code;
 
@@ -31,12 +29,17 @@ export default class ResetPassword extends Component {
         });
     };
 
+    handlePasswordChange = e => {
+        let val = e && e.target && e.target.value;
+        this.setState({ password: val })
+    };
+
     render () {
         return (
             <div>
                 <RowProgressBar current={ 2 }/>
-                <RowPassword ref="password" placeholder="新密码"/>
-                <RowRePassword ref="rePassword"/>
+                <RowInput ref="password" name="password" type="password" isRequired isPassword onChange={ this.handlePasswordChange } placeholder="新密码"/>
+                <RowInput ref="rePassword" name="rePassword" type="password" isEquals={ this.state.password } placeholder="重复密码" validateMsg="重复密码不正确!"/>
                 <RowSubmit onSubmit={ this.handleUpdatePassword } name="修改密码" msg={ this.state.msg }/>
             </div>
         );

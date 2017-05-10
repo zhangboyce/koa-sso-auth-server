@@ -2,10 +2,6 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import Utils from '../../common/Utils';
-import RowEmail from './common/RowEmail.jsx';
-import RowPassword from './common/RowPassword.jsx';
-import RowSubmit from './common/RowSubmit.jsx';
 
 export default class Welcome extends Component {
     render () {

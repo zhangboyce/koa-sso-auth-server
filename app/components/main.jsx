@@ -13,7 +13,6 @@ import RegisterOk from './user/RegisterOk.jsx';
 import ResetPassword from './user/ResetPassword.jsx';
 import ResetPasswordOk from './user/ResetPasswordOk.jsx';
 import UserCenterContainer from './user/UserCenterContainer.jsx';
-import UserCenterHead from './user/UserCenterHead.jsx';
 import UserCenterInfo from './user/UserCenterInfo.jsx'
 import UserCenterAccount from './user/UserCenterAccount.jsx'
 

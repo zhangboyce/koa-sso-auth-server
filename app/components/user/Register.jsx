@@ -3,26 +3,24 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Utils from '../../../common/Utils';
-import RowPassword from './../common/RowPassword.jsx';
-import RowRePassword from './../common/RowRePassword.jsx';
+import RowInput from './../common/RowInput.jsx';
 import RowSubmit from './../common/RowSubmit.jsx';
-import RowEmail from './../common/RowEmail.jsx';
 
 export default class Register extends Component {
     constructor(props) {
         super(props);
-        this.state = { msg: '' }
+        this.state = { msg: '', password: '' }
     }
 
     handleRegister = () => {
         let pv = this.refs.password.validate();
         let ev = this.refs.email.validate();
-        let password = this.refs.password.val;
+        let rpv = this.refs.rePassword.validate();
 
-        let rpv = this.refs.rePassword.validate(password);
         if (!ev || !pv || !rpv) return;
 
         let email = this.refs.email.val;
+        let password = this.refs.password.val;
         password = Utils.md5ByString(password + Utils.salt);
 
         $.post('/api/user/register', { password, email }, json => {
@@ -33,12 +31,18 @@ export default class Register extends Component {
         });
     };
 
+    handlePasswordChange = e => {
+        let val = e && e.target && e.target.value;
+        this.setState({ password: val })
+    };
+
     render () {
         return (
             <div>
-                <RowEmail ref="email"/>
-                <RowPassword ref="password" placeholder="密码"/>
-                <RowRePassword ref="rePassword"/>
+                <RowInput ref="email" name="email" isRequired isEmail placeholder="邮箱地址"/>
+                <RowInput ref="password" name="password" type="password" isRequired isPassword placeholder="密码" onChange={ this.handlePasswordChange }/>
+                <RowInput ref="rePassword" name="rePassword" type="password" isEquals={ this.state.password } validateMsg="重复密码不正确!" placeholder="重复密码"/>
+
                 <RowSubmit onSubmit={ this.handleRegister } name="注册新用户" msg={ this.state.msg }/>
 
                 <div className="row divider">

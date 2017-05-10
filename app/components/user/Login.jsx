@@ -3,8 +3,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Utils from '../../../common/Utils';
-import RowEmail from './../common/RowEmail.jsx';
-import RowPassword from './../common/RowPassword.jsx';
+import RowInput from './../common/RowInput.jsx';
 import RowSubmit from './../common/RowSubmit.jsx';
 
 export default class Login extends Component {
@@ -40,12 +39,12 @@ export default class Login extends Component {
     render () {
         return (
             <div>
-                <RowEmail ref="email"/>
-                <RowPassword ref="password">
+                <RowInput ref="email" name="email" isRequired isEmail/>
+                <RowInput ref="password" name="password" type="password" isRequired >
                     <span className="forget-password">
                         <Link to="/user/sendForgetPasswordEmail">忘记密码?</Link>
                     </span>
-                </RowPassword>
+                </RowInput>
                 <RowSubmit onSubmit={ this.handleLogin } name="登录" msg={ this.state.msg }/>
 
                 <div className="row divider">

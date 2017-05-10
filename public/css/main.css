@@ -1,7 +1,3 @@
-html{
-    font-size: 10px;
-    font-family: sans-serif;
-}
 body {
     background-color: rgb(254,254,254);
     height:100%;
@@ -48,7 +44,8 @@ body {
 }
 
 .user-container .row.email,
-.user-container .row.password {
+.user-container .row.password,
+.user-container .row.rePassword {
     margin-bottom: 20px;
 }
 
@@ -147,99 +144,101 @@ body {
     margin-top: 60px;
 }
 
-/*修改个人信息*/
-.user-center-container{
+
+.border {
+    border: 1px solid rgb(164, 164, 164);
+}
+
+.user-center-content{
     margin-left: 12%;
     display: flex;
 }
 
-.user_center_container a{
+.user-center-container a{
     text-decoration: none;
     color: gray;
 }
 
-.user_center_container a:hover{
+.user-center-container a:hover{
     text-decoration: none;
 }
 
-.user_center_container .navbar{
+.user-center-container .navbar{
     border-radius: 0;
     height: 70px;
     line-height: 50px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(164, 164, 164);
 }
 
-.user_center_container .navbar-brand{
+.user-center-container .navbar-brand{
     font-size: 2rem;
 }
 
-.user_center_container .logo{
+.user-center-container .logo{
     height: 60px;
     width: 96px;
     float: left;
     margin-right: 30px;
 }
 
-.user-center-container h4,p{
+.user-center-content h4,p{
     margin: 0!important;
     padding: 0;
 }
 
-.user-center-container h4{
+.user-center-content h4{
     font-size: 1.8rem;
 }
 
-.user-center-container .des, .user-center-container .emailadress{
+.user-center-content .des, .user-center-content .emailadress{
     font-size: 1.4rem;
 }
 
-.user-center-container .main_left{
+.user-center-content .main_left{
     width: 27%;
     margin-top: 40px;
 }
 
-.user-center-container .main_left .head{
+.user-center-content .main_left .head{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.user-center-container .head>div>p{
+.user-center-content .head>div>p{
     width: 160px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.user-center-container .menus>section.border{
+.user-center-content .menus>section.border{
     margin-top: 50px;
 }
 
-.user-center-container .img_1{
+.user-center-content .img_1{
     width: 62%;height: 60px;
     margin-right: 40px;
     margin-left: 20px;
 }
 
-.user-center-container .img_2{
+.user-center-content .img_2{
     height: 60px;
     width: 80px;
     margin-right: 40px;
 }
 
-.user-center-container label{
+.user-center-content label{
     color: grey;
     font-size: 1.5rem;
     font-weight: bold;
 }
 
-.user-center-container .head{
+.user-center-content .head{
     height: 90px;
-    border: 1px solid black;
 }
 
-.user-center-container .border{
-    border: 1px solid black;
+.user-center-content .border{
     font-weight: bold;
     text-align: center;
     height: 50px;
@@ -248,8 +247,7 @@ body {
     margin-top: 15px;
 }
 
-.user-center-container .main_right{
-    border: 1px solid black;
+.user-center-content .main_right{
     padding: 20px 30px;
     width: 45%;
     height: 515px;
@@ -257,120 +255,120 @@ body {
     margin-top: 40px;
 }
 
-.user-center-container li {
+.user-center-content li {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.user-center-container .perinfo{
+.user-center-content .perinfo{
     margin-bottom: 30px!important;
 }
 
-.user-center-container .control-label{
+.user-center-content .control-label{
     text-align: left!important;
 }
 
-.user-center-container .form-control{
+.user-center-content .form-control{
     height: 35px!important;
 }
 
 @media (min-width: 768px){
-    .user-center-container .main_right .form-group .avatar-label {
+    .user-center-content .main_right .form-group .avatar-label {
         padding-top: 25px;
     }
-    .user-center-container .info-group .col-sm-8 {
+    .user-center-content .info-group .col-sm-8 {
         width: 70%;
         margin-left: -4%;
     }
-    .user-center-container .btn, .user-center-container input {
+    .user-center-content .btn, .user-center-content input {
         max-width: 284px;
     }
-    .user-center-container .info-group .col-sm-3 {
+    .user-center-content .info-group .col-sm-3 {
         width: 30%;
     }
-    .user-center-container .form-horizontal .control-label {
+    .user-center-content .form-horizontal .control-label {
         padding-top: 7px;
         margin-bottom: 0;
         /*可有可无?*/
         text-align: right;
     }
-    .user-center-container .info-group .col-sm-offset-2 {
+    .user-center-content .info-group .col-sm-offset-2 {
         margin-left: 26%;
     }
-    .user-center-container .submit>.col-sm-8 {
+    .user-center-content .submit>.col-sm-8 {
          margin-left: 26%;
      }
 }
 
 @media (max-width: 964px){
-    .user-center-container label{
+    .user-center-content label{
         font-size: 1.4rem;
     }
 }
 @media (max-width: 922px){
-    .user-center-container label{
+    .user-center-content label{
         font-size: 1.3rem;
     }
 }
 @media (max-width: 880px){
-    .user-center-container label{
+    .user-center-content label{
         font-size: 1.2rem;
     }
 }
 
 @media (max-width: 768px) {
-    .user-center-container .main_left {
+    .user-center-content .main_left {
         display: none;
     }
-    .user-center-container .main_right {
+    .user-center-content .main_right {
         width:70%;
     }
-    .user-center-container input, .user-center-container .btn {
+    .user-center-content input, .user-center-content .btn {
         max-width: 250px;
     }
-    .user-center-container .main_right .form-group .avatar-label {
+    .user-center-content .main_right .form-group .avatar-label {
         padding-top: 25px;
     }
-    .user-center-container .form-horizontal .control-label {
+    .user-center-content .form-horizontal .control-label {
         padding-top: 7px;
         margin-bottom: 0;
         text-align: right;
     }
-    .user-center-container .info-group .col-sm-offset-2 {
+    .user-center-content .info-group .col-sm-offset-2 {
         margin-left: 30%;
     }
-    .user-center-container .info-group .col-sm-3 {
+    .user-center-content .info-group .col-sm-3 {
         width: 30%;
     }
-    .user-center-container label{
+    .user-center-content label{
         font-size: 1.5rem;
     }
-    .user-center-container .submit>.col-sm-8 {
+    .user-center-content .submit>.col-sm-8 {
         margin-left: 30%;
     }
 }
 @media (max-width: 575px){
-    .user-center-container .info-group .col-sm-offset-2 {
+    .user-center-content .info-group .col-sm-offset-2 {
         margin-left: 0;
     }
-    .user-center-container .info-group .col-sm-offset-2 {
+    .user-center-content .info-group .col-sm-offset-2 {
         width:100%;
     }
-    .user-center-container .submit>.col-sm-8 {
+    .user-center-content .submit>.col-sm-8 {
         margin-left: 0;
     }
 }
-.user-center-container .submit>.col-sm-8>.btn {
+.user-center-content .submit>.col-sm-8>.btn {
     height: 35px;
 }
 
-.user-center-container .btn-lg {
+.user-center-content .btn-lg {
     min-width: 120px;
     padding: 9px 16px;
 }
 
-.user-center-container .file {
+.user-center-content .file {
     position: relative;
     display: inline-block;
     background: white;
@@ -387,7 +385,7 @@ body {
     top: 10px;
 }
 
-.user-center-container .file input {
+.user-center-content .file input {
     position: absolute;
     font-size: 100px;
     right: 0;
@@ -395,34 +393,34 @@ body {
     opacity: 0;
 }
 
-.user-center-container .file:hover {
+.user-center-content .file:hover {
     background: #3DA8F5;
     color: white;
     text-decoration: none;
 }
 
-.user-center-container p.loginaccount{
+.user-center-content p.loginaccount{
     font-size: 19px;
     font-weight: bold;
 }
 
 
-.user-center-container ul li{
+.user-center-content ul li{
     position: relative;
 }
 
-.user-center-container .btn-primary {
+.user-center-content .btn-primary {
     background-color: rgb(51,122,183);
 }
 
-.user-center-container .row {
+.user-center-content .row {
     margin-bottom: 15px;
 }
-.user-center-container .row {
+.user-center-content .row {
     position: relative;
 }
 
-.user-center-container .row span.msg {
+.user-center-content .row span.msg {
     position: absolute;
     left: 95%;
     top: 10px;
@@ -432,15 +430,15 @@ body {
     white-space: nowrap;
 }
 
-.user-center-container .row span.msg i {
+.user-center-content .row span.msg i {
     font-size: 18px;
     margin-right: 4px;
 }
 
-.user-center-container .row span.msg i.fa-check-circle {
+.user-center-content .row span.msg i.fa-check-circle {
     color: rgb(63, 189, 148);
 }
 
-.user-center-container .row span.msg i.fa-times-circle {
+.user-center-content .row span.msg i.fa-times-circle {
     color: rgb(244, 92, 66);
 }

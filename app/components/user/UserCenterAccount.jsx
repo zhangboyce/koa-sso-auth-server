@@ -3,27 +3,23 @@
 import React, { Component } from 'react';
 import Utils from '../../../common/Utils';
 
-import RowPassword from '../common/RowPassword.jsx';
-import RowRePassword from '../common/RowRePassword.jsx';
+import RowInput from '../common/RowInput.jsx';
 import RowSubmit from '../common/RowSubmit.jsx';
-import RowEmail from '../common/RowEmail.jsx';
-import _Input_ from './_Input_.jsx';
 
 export default class UserCenterAccount extends Component {
 
     constructor(props){
         super(props);
-        this.state = { msg: '' };
+        this.state = { msg: '', password: '' };
     }
 
     handleSave = () => {
         let op = this.refs.oldPassword.validate();
         let np = this.refs.newPassword.validate();
-
+        let nrp = this.refs.newRePassword.validate();
 
         let newPassword = this.refs.newPassword.val;
         let oldPassword = this.refs.oldPassword.val;
-        let nrp = this.refs.newRePassword.validate(newPassword);
 
         if (!op || !np || !nrp) return;
 
@@ -38,6 +34,10 @@ export default class UserCenterAccount extends Component {
         });
     };
 
+    handlePasswordChange = e => {
+        let val = e && e.target && e.target.value;
+        this.setState({ password: val })
+    };
 
     render () {
         return (
@@ -56,12 +56,10 @@ export default class UserCenterAccount extends Component {
                         </div>
                     </div>
                     <hr/>
-                    <RowPassword ref="oldPassword" placeholder="旧密码" inputClassName="col-sm-8" labelClassName="col-sm-3" label="旧密码"/>
 
-                    <RowPassword ref="newPassword" placeholder="新密码" label="新密码" inputClassName="col-sm-8" labelClassName="col-sm-3"/>
-
-                    <RowRePassword ref="newRePassword" placeholder="确认新密码" label="确认新密码" inputClassName="col-sm-8" labelClassName="col-sm-3"/>
-
+                    <RowInput ref="oldPassword" name="oldPassword" type="password" isRequired isPassword inputClassName="col-sm-8" labelClassName="col-sm-3" label="旧密码" placeholder="旧密码" />
+                    <RowInput ref="newPassword" name="newPassword" type="password" isRequired isPassword onChange={ this.handlePasswordChange } inputClassName="col-sm-8" labelClassName="col-sm-3" label="新密码" placeholder="新密码" />
+                    <RowInput ref="newRePassword" name="newRePassword" type="password" isEquals={ this.state.password } inputClassName="col-sm-8" labelClassName="col-sm-3" label="确认新密码" placeholder="确认新密码"/>
 
                     <RowSubmit btnClassName="col-sm-8" onSubmit={ this.handleSave } name="保存" msg={ this.state.msg }/>
 

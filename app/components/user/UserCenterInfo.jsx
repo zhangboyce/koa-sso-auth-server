@@ -1,7 +1,8 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import _Input_ from './_Input_.jsx';
+import RowInput from '../common/RowInput.jsx';
+import RowSubmit from '../common/RowSubmit.jsx';
 
 export default class UserCenterInfo extends Component {
 
@@ -9,7 +10,7 @@ export default class UserCenterInfo extends Component {
         super(props);
         this.state = {
             user: {name: 'Jack', job: '工',phone:'12',birthday:'1990',address:'beijing'},
-            message: ''
+            msg: ''
         };
     }
 
@@ -21,14 +22,11 @@ export default class UserCenterInfo extends Component {
     }
 
     handleChange = e =>  {
-        console.dir(e.target);
-        console.log("state",this.state);
         let name = e.target.name;
         let value = e.target.value;
 
         let obj = {};
         obj[name] = value;
-
         this.setState({ user: Object.assign(this.state.user, obj) });
     };
 
@@ -68,21 +66,13 @@ export default class UserCenterInfo extends Component {
                                     <div className="clear"></div>
                                 </li>
 
-                                <_Input_ onChange={ this.handleChange } label="姓名" name="name" value={ this.state.user.name }/>
+                                <RowInput onChange={ this.handleChange } name="name" label="姓名" inputClassName="col-sm-8" labelClassName="col-sm-3" />
+                                <RowInput onChange={ this.handleChange } name="job" label="职位" inputClassName="col-sm-8" labelClassName="col-sm-3" />
+                                <RowInput onChange={ this.handleChange } name="phone" isPhone label="联系电话" inputClassName="col-sm-8" labelClassName="col-sm-3" />
+                                <RowInput onChange={ this.handleChange } name="birthday" label="生日" inputClassName="col-sm-8" labelClassName="col-sm-3" />
+                                <RowInput onChange={ this.handleChange } name="address" label="所在地" inputClassName="col-sm-8" labelClassName="col-sm-3" />
 
-                                <_Input_ onChange={ this.handleChange } label="职位" name="job" value={ this.state.user.job }/>
-
-                                <_Input_ onChange={ this.handleChange } label="联系电话" name="phone" value={ this.state.user.phone }/>
-
-                                <_Input_ onChange={ this.handleChange } label="生日" name="birthday" value={ this.state.user.birthday }/>
-
-                                <_Input_ onChange={ this.handleChange } label="所在地" name="address" value={ this.state.user.address }/>
-
-                                <li className="form-group row">
-                                    <div className="col-sm-8 col-sm-offset-2">
-                                        <button type="submit" onClick={ this.handleSubmit } className="btn btn-lg btn-primary btn-block">保存</button>
-                                    </div>
-                                </li>
+                                <RowSubmit btnClassName="col-sm-8" onSubmit={ this.handleSubmit } name="保存" msg={ this.state.msg }/>
                         </div>
                     </div>
                 </div>

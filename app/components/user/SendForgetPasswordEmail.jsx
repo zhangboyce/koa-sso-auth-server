@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import RowSubmit from './../common/RowSubmit.jsx';
-import RowEmail from './../common/RowEmail.jsx';
+import RowInput from './../common/RowInput.jsx';
 import RowProgressBar from './../common/RowProgressBar.jsx';
 
 export default class SendForgetPasswordEmail extends Component {
@@ -37,7 +37,7 @@ export default class SendForgetPasswordEmail extends Component {
         return (
             <div>
                 <RowProgressBar current={ 1 }/>
-                <RowEmail ref="email"/>
+                <RowInput ref="email" name="email" isRequired isEmail />
                 <RowSubmit onSubmit={ this.handleSendEmail } loadingName="正在发送... ..." name={ name } msg={ this.state.msg }/>
             </div>
         );
