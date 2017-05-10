@@ -34,7 +34,11 @@ export default class RowPassword extends Component {
     render() {
         return (
             <div className="row password">
-                <div className="col-sm-3">
+                {
+                    this.props.label &&
+                    <label className={ "control-label " + ( this.props.labelClassName || "col-sm-1" ) }>{ this.props.label }</label>
+                }
+                <div className={ this.props.inputClassName  || 'col-sm-3'}>
                     { this.props.children }
                     <input name="password" ref="password" onBlur={this.validate  } type="password" className="form-control" placeholder={ this.props.placeholder || '密码' }/>
                 </div>

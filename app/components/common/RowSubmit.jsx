@@ -31,12 +31,16 @@ export default class RowSubmit extends Component {
     render() {
         return (
             <div className="row submit">
-                <div className="col-sm-3">
-                    <button type="button" className="btn btn-primary"
+                <div className={ this.props.btnClassName || "col-sm-3" }>
+                    <button type="button" className="btn btn-primary btn-block"
                             onClick={ this.handleClick }
                             data-loading-text={'<i class="fa fa-spinner fa-spin" />    ' + this.props.loadingName}>{ this.props.name }</button>
                 </div>
-                <MsgSpan msg={ this.props.msg } validated={ this.state.validated } />
+                {
+                    !this.props.btnClassName &&
+                    <MsgSpan msg={ this.props.msg } validated={ this.state.validated } />
+                }
+
             </div>
         );
     }

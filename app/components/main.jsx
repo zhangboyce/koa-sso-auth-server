@@ -12,6 +12,11 @@ import Register from './user/Register.jsx';
 import RegisterOk from './user/RegisterOk.jsx';
 import ResetPassword from './user/ResetPassword.jsx';
 import ResetPasswordOk from './user/ResetPasswordOk.jsx';
+import UserCenterContainer from './user/UserCenterContainer.jsx';
+import UserCenterHead from './user/UserCenterHead.jsx';
+import UserCenterInfo from './user/UserCenterInfo.jsx'
+import UserCenterAccount from './user/UserCenterAccount.jsx'
+
 
 ReactDOM.render(
     <Router history={ browserHistory }>
@@ -25,5 +30,10 @@ ReactDOM.render(
                 <Route path="resetPassword" component={ ResetPassword }/>
                 <Route path="resetPasswordOk" component={ ResetPasswordOk }/>
             </Route>
+        </Route>
+        <Route path="/revise" component={ UserCenterContainer }>
+            <IndexRoute component={ UserCenterInfo }/>
+            <Route path="info" component={ UserCenterInfo }/>
+            <Route path="account" component={ UserCenterAccount }/>
         </Route>
     </Router>, document.getElementById('main'));
