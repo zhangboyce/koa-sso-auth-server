@@ -290,6 +290,18 @@ router.get('/api/user/valid', function *() {
     }
 });
 
+router.get('/api/user/getUserInfo', function *() {
+
+});
+
+router.post('/api/user/updateUserInfo', function *() {
+
+});
+
+router.post('/api/user/updatePassword', function *() {
+
+});
+
 function * generateCode(token) {
     let code = Utils.random();
     yield client.setAsync('code-' + code, token);

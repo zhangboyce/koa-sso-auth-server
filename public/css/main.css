@@ -1,7 +1,13 @@
+html{
+    font-size: 10px;
+    font-family: sans-serif;
+}
 body {
     background-color: rgb(254,254,254);
 }
-
+html,body{
+    height:100%;
+}
 .header {
     text-align: center;
     padding: 20px 0;
@@ -112,3 +118,304 @@ body {
     font-style: inherit;
     color: rgb(168, 168, 168);
 }
+/*修改个人信息*/
+.user-center-container{
+    margin-left: 12%;
+    display: flex;
+}
+
+.user_center_container a{
+    text-decoration: none;
+    color: gray;
+}
+
+.user_center_container a:hover{
+    text-decoration: none;
+}
+
+.user_center_container .navbar{
+    border-radius: 0;
+    height: 70px;
+    line-height: 50px;
+    border-bottom: 1px solid black;
+}
+
+.user_center_container .navbar-brand{
+    font-size: 2rem;
+}
+
+.user_center_container .logo{
+    height: 60px;
+    width: 96px;
+    float: left;
+    margin-right: 30px;
+}
+
+.user-center-container h4,p{
+    margin: 0!important;
+    padding: 0;
+}
+
+.user-center-container h4{
+    font-size: 1.8rem;
+}
+
+.user-center-container .des, .user-center-container .emailadress{
+    font-size: 1.4rem;
+}
+
+.user-center-container .main_left{
+    width: 27%;
+    margin-top: 40px;
+}
+
+.user-center-container .main_left .head{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-center-container .head>div>p{
+    width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.user-center-container .menus>section.border{
+    margin-top: 50px;
+}
+
+.user-center-container .img_1{
+    width: 62%;height: 60px;
+    margin-right: 40px;
+    margin-left: 20px;
+}
+
+.user-center-container .img_2{
+    height: 60px;
+    width: 80px;
+    margin-right: 40px;
+}
+
+.user-center-container label{
+    color: grey;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.user-center-container .head{
+    height: 90px;
+    border: 1px solid black;
+}
+
+.user-center-container .border{
+    border: 1px solid black;
+    font-weight: bold;
+    text-align: center;
+    height: 50px;
+    font-size: 1.8rem;
+    line-height: 50px;
+    margin-top: 15px;
+}
+
+.user-center-container .main_right{
+    border: 1px solid black;
+    padding: 20px 30px;
+    width: 45%;
+    height: 515px;
+    margin-left: 10%;
+    margin-top: 40px;
+}
+
+.user-center-container li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.user-center-container .perinfo{
+    margin-bottom: 30px!important;
+}
+
+.user-center-container .control-label{
+    text-align: left!important;
+}
+
+.user-center-container .form-control{
+    height: 35px!important;
+}
+
+@media (min-width: 768px){
+    .user-center-container .main_right .form-group .avatar-label {
+        padding-top: 25px;
+    }
+    .user-center-container .info-group .col-sm-8 {
+        width: 70%;
+        margin-left: -4%;
+    }
+    .user-center-container .btn, .user-center-container input {
+        max-width: 284px;
+    }
+    .user-center-container .info-group .col-sm-3 {
+        width: 30%;
+    }
+    .user-center-container .form-horizontal .control-label {
+        padding-top: 7px;
+        margin-bottom: 0;
+        /*可有可无?*/
+        text-align: right;
+    }
+    .user-center-container .info-group .col-sm-offset-2 {
+        margin-left: 26%;
+    }
+    .user-center-container .submit>.col-sm-8 {
+         margin-left: 26%;
+     }
+}
+
+@media (max-width: 964px){
+    .user-center-container label{
+        font-size: 1.4rem;
+    }
+}
+@media (max-width: 922px){
+    .user-center-container label{
+        font-size: 1.3rem;
+    }
+}
+@media (max-width: 880px){
+    .user-center-container label{
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .user-center-container .main_left {
+        display: none;
+    }
+    .user-center-container .main_right {
+        width:70%;
+    }
+    .user-center-container input, .user-center-container .btn {
+        max-width: 250px;
+    }
+    .user-center-container .main_right .form-group .avatar-label {
+        padding-top: 25px;
+    }
+    .user-center-container .form-horizontal .control-label {
+        padding-top: 7px;
+        margin-bottom: 0;
+        text-align: right;
+    }
+    .user-center-container .info-group .col-sm-offset-2 {
+        margin-left: 30%;
+    }
+    .user-center-container .info-group .col-sm-3 {
+        width: 30%;
+    }
+    .user-center-container label{
+        font-size: 1.5rem;
+    }
+    .user-center-container .submit>.col-sm-8 {
+        margin-left: 30%;
+    }
+}
+@media (max-width: 575px){
+    .user-center-container .info-group .col-sm-offset-2 {
+        margin-left: 0;
+    }
+    .user-center-container .info-group .col-sm-offset-2 {
+        width:100%;
+    }
+    .user-center-container .submit>.col-sm-8 {
+        margin-left: 0;
+    }
+}
+.user-center-container .submit>.col-sm-8>.btn {
+    height: 35px;
+}
+
+.user-center-container .btn-lg {
+    min-width: 120px;
+    padding: 9px 16px;
+}
+
+.user-center-container .file {
+    position: relative;
+    display: inline-block;
+    background: white;
+    border: 1px solid #3DA8F5;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #3DA8F5;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+    margin-top: 15px;
+    font-size: 1.6rem;
+    top: 10px;
+}
+
+.user-center-container .file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.user-center-container .file:hover {
+    background: #3DA8F5;
+    color: white;
+    text-decoration: none;
+}
+
+.user-center-container p.loginaccount{
+    font-size: 19px;
+    font-weight: bold;
+}
+
+
+.user-center-container ul li{
+    position: relative;
+}
+
+.user-center-container .btn-primary {
+    background-color: rgb(51,122,183);
+}
+
+.user-center-container .row {
+    margin-bottom: 15px;
+}
+.user-center-container .row {
+    position: relative;
+}
+
+.user-center-container .row span.msg {
+    position: absolute;
+    left: 95%;
+    top: 10px;
+    font-size: 12px;
+    color: rgb(244, 92, 66);
+    width: 150px;
+    white-space: nowrap;
+}
+
+.user-center-container .row span.msg i {
+    font-size: 18px;
+    margin-right: 4px;
+}
+
+.user-center-container .row span.msg i.fa-check-circle {
+    color: rgb(63, 189, 148);
+}
+
+.user-center-container .row span.msg i.fa-times-circle {
+    color: rgb(244, 92, 66);
+}
+
+
+
+

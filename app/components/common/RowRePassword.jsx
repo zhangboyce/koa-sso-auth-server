@@ -26,7 +26,11 @@ export default class RowRePassword extends Component {
     render() {
         return (
             <div className="row password">
-                <div className="col-sm-3">
+                {
+                    this.props.label &&
+                    <label className={ "control-label " + ( this.props.labelClassName || "col-sm-1" ) }>{ this.props.label }</label>
+                }
+                <div className={ this.props.inputClassName  || 'col-sm-3'}>
                     <input name="password" ref="rePassword" type="password" className="form-control" placeholder={ this.props.placeholder || '重复密码' } />
                 </div>
                 <MsgSpan msg={ this.state.msg } validated={ this.state.validated }/>
