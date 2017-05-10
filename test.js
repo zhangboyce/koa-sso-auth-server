@@ -16,7 +16,7 @@ function testRedis() {
 
 function encodePassword() {
    const Utils = require('./common/Utils');
-   let encodePassword = Utils.md5ByString('123' + Utils.salt);
+   let encodePassword = Utils.md5ByString('1' + Utils.salt);
 
    console.log('--' + encodePassword);
 }
@@ -30,4 +30,4 @@ function _config() {
    console.log('NODE_APP_INSTANCE: ' + config.util.getEnv('NODE_APP_INSTANCE'));
 }
 
-_config();
+encodePassword();
