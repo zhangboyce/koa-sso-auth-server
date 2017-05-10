@@ -40,6 +40,21 @@ export default class Register extends Component {
                 <RowPassword ref="password" placeholder="密码"/>
                 <RowRePassword ref="rePassword"/>
                 <RowSubmit onSubmit={ this.handleRegister } name="注册新用户" msg={ this.state.msg }/>
+
+                <div className="row divider">
+                    <div className="col-sm-3">
+                        <span>OR</span>
+                    </div>
+                </div>
+
+                <div className="row register">
+                    <div className="col-sm-3">
+                        <span>已有账号</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span>
+                            <Link to="/user/login">返回登录</Link>
+                        </span>
+                    </div>
+                </div>
             </div>
         );
     }

@@ -4,10 +4,13 @@ html{
 }
 body {
     background-color: rgb(254,254,254);
-}
-html,body{
     height:100%;
 }
+
+.main {
+    position: relative;
+}
+
 .header {
     text-align: center;
     padding: 20px 0;
@@ -18,6 +21,17 @@ html,body{
 
 .footer {
     margin: 36px -14px 0 -14px ;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+}
+
+.footer img {
+    width: 120px;
+}
+
+.footer em {
+    font-size: 14px;
 }
 
 .user-container {
@@ -39,7 +53,7 @@ html,body{
 }
 
 .user-container .row.submit button {
-    background-color: rgb(87, 104, 252);
+    background-color: rgb(51, 122, 183);
     width: 100%;
 }
 
@@ -60,18 +74,12 @@ html,body{
 }
 
 .user-container .row.register span {
-    position: absolute;
-    top: -10px;
     font-size: 14px;
     color: rgb(169, 166, 163);
 }
 
 .user-container .row.register span:first-child {
-    left: 20px;
-}
-
-.user-container .row.register span:last-child {
-    right: 20px;
+    font-size: 12px;
 }
 
 .user-container .row {
@@ -118,6 +126,27 @@ html,body{
     font-style: inherit;
     color: rgb(168, 168, 168);
 }
+
+.user-container .row.divider div {
+    border-top: .0625rem solid #e4e4e4;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 0;
+}
+
+.user-container .row.divider span {
+    display: inline-block;
+    position: relative;
+    padding: 0 .75rem;
+    top: -10px;
+    background: #fff;
+}
+
+.user-container .row.desc {
+    margin-top: 60px;
+}
+
 /*修改个人信息*/
 .user-center-container{
     margin-left: 12%;
@@ -415,7 +444,3 @@ html,body{
 .user-center-container .row span.msg i.fa-times-circle {
     color: rgb(244, 92, 66);
 }
-
-
-
-

@@ -48,13 +48,29 @@ export default class Login extends Component {
                 </RowPassword>
                 <RowSubmit onSubmit={ this.handleLogin } name="登录" msg={ this.state.msg }/>
 
+                <div className="row divider">
+                    <div className="col-sm-3">
+                        <span>OR</span>
+                    </div>
+                </div>
+
                 <div className="row register">
                     <div className="col-sm-3">
-                        <span>还没有账号?</span>
+                        <span>还没有账号?</span>&nbsp;&nbsp;&nbsp;&nbsp;
                         <span>
-                            <Link to="/user/register">注册新账号</Link>
+                            <Link to="/user/register">注册</Link>
                         </span>
                     </div>
+                </div>
+
+                <div className="row desc">
+                    <p>
+                        <small>
+                            <em>idea CCE maker 在你的脑袋上真的开了一个洞...</em>
+                        </small>
+                        <br/>
+                        <br/>
+                    </p>
                 </div>
             </div>
         );
