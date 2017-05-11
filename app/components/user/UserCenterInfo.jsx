@@ -3,6 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 import RowInput from '../common/RowInput.jsx';
 import RowSubmit from '../common/RowSubmit.jsx';
+import Modal from '../common/Modal.jsx';
 
 export default class UserCenterInfo extends Component {
 
@@ -53,9 +54,10 @@ export default class UserCenterInfo extends Component {
                             <div className="col-sm-8">
                                 <div className="choosefile">
                                     <img className="img_2  img-circle" src="http://boom-static.static.cceato.com/boom/imgs/login-logo-2.gif" alt="" />
-                                    <a href="javascript:;" className="file">选择文件
-                                        <input type="file" name="" id="" />
-                                    </a>
+
+                                        <button className="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">更改头像</button>
+                                        <Modal />
+
                                 </div>
                             </div>
                             <div className="clear"></div>

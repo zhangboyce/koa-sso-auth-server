@@ -51,7 +51,6 @@ export default class UserCenterContainer extends Component {
                         </div>
                     </div>
                 </nav>
-                <div className="underline"></div>
                 <div className="user-center-content">
                     <div className="main_left">
                         <div className="head col-sm-12">
