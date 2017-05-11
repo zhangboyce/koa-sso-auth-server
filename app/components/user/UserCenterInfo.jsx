@@ -3,7 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 import RowInput from '../common/RowInput.jsx';
 import RowSubmit from '../common/RowSubmit.jsx';
-import Modal from '../common/Modal.jsx';
+import AvatarModal from './AvatarModal.jsx';
 
 export default class UserCenterInfo extends Component {
 
@@ -37,7 +37,10 @@ export default class UserCenterInfo extends Component {
 
             }
         });
+    };
 
+    handleSubmitAvatar = url => {
+        this.props.onSubmitAvatar(url);
     };
 
     render () {
@@ -53,14 +56,11 @@ export default class UserCenterInfo extends Component {
                             <label className="control-label col-sm-3 col-lg-2 avatar-label">头像</label>
                             <div className="col-sm-8">
                                 <div className="choosefile">
-                                    <img className="img_2  img-circle" src="http://boom-static.static.cceato.com/boom/imgs/login-logo-2.gif" alt="" />
-
-                                        <button className="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">更改头像</button>
-                                        <Modal />
-
+                                    <img data-toggle="modal" data-target="#avatarModal" className="img_2 img-circle" src={ window.STATIC_SERVER + 'boom/imgs/avatars/' + (account.avatar || '01.png')  } />
+                                    <a href="javascript:;" data-toggle="modal" data-target="#avatarModal" >更换头像</a>
+                                    <AvatarModal onSubmitAvatar={ this.handleSubmitAvatar }/>
                                 </div>
                             </div>
-                            <div className="clear"></div>
                         </div>
 
                         <RowInput onChange={ this.handleChange }
@@ -116,5 +116,6 @@ export default class UserCenterInfo extends Component {
 
 UserCenterInfo.propTypes = {
     account: PropTypes.object,
-    onChangeUserInfo: PropTypes.func.isRequired
+    onChangeUserInfo: PropTypes.func.isRequired,
+    onSubmitAvatar: PropTypes.func.isRequired
 };

@@ -14,11 +14,11 @@ const defaultValidateRegex = {
     },
     'phone': {
         regex: /((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/,
-        msg: '电话号码格式不正确, 形如: 13333333333; 021-00000000, 0851-0000000'
+        msg: '电话号码格式不正确'
     },
     'password': {
         regex: /^(?=.*[A-Za-z])(?=.*\d)[\d\D]{6,}$/,
-        msg: '密码格式不正确, 至少包含一个数字和一个字母, 且长度不少于6位'
+        msg: '格式至少包含数字和字母, 且长度大于6位'
     }
 };
 
@@ -55,7 +55,7 @@ export default class RowInput extends Component {
             isEquals !== '' &&
             isEquals !== value) {
 
-            let msg = validateMsg || '字段值不正确!';
+            let msg = validateMsg || '密码不正确';
             this.setState({ msg: msg });
             return false;
         }
@@ -67,7 +67,7 @@ export default class RowInput extends Component {
             isPhone === true ? '电话号码' :
             isPassword === true ? '密码' : '该字段';
         if (isRequired === true && value === '') {
-            let msg = validateMsg || ( msg_prefix + '不能为空!');
+            let msg = validateMsg || ( msg_prefix + '不能为空');
             this.setState({ msg: msg });
             return false;
         }

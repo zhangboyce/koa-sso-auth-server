@@ -39,12 +39,20 @@ export default class UserCenterContainer extends Component {
         this.setState({ account: Object.assign(this.state.account, obj) });
     };
 
+    handleSubmitAvatar = avatar => {
+        let obj = {};
+        obj['avatar'] = avatar;
+        this.setState({ account: Object.assign(this.state.account, obj) });
+    };
+
     render () {
         const account  = this.state.account;
         return (
             <div className="user-center-container">
                 <nav className="navbar" role="navigation">
-                    <img className="logo" src="http://boom-static.static.cceato.com/boom/imgs/login-logo-2.gif" alt=""/>
+                    <Link to="/welcome">
+                        <img className="logo" src="http://boom-static.static.cceato.com/boom/imgs/login-logo-2.gif" />
+                    </Link>
                     <div className="container">
                         <div className="navbar-header">
                             <a className="navbar-brand">脑洞个人用户中心</a>
@@ -55,7 +63,7 @@ export default class UserCenterContainer extends Component {
                     <div className="main_left">
                         <div className="head col-sm-12">
                             <div>
-                                <img className="img_1 img-circle" src="http://boom-static.static.cceato.com/boom/imgs/login-logo-2.gif"/>
+                                <img className="img_1 img-circle" src={ window.STATIC_SERVER + 'boom/imgs/avatars/' + (account.avatar || '01.png') }/>
                             </div>
 
                             <div>
@@ -76,6 +84,7 @@ export default class UserCenterContainer extends Component {
                     {
                         this.state.active === 'info' &&
                         <UserCenterInfo account={ account }
+                                        onSubmitAvatar={ this.handleSubmitAvatar }
                                         onChangeUserInfo={ this.handleChangeUserInfo } />
                     }
                     {

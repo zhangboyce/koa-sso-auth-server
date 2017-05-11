@@ -170,6 +170,7 @@ body {
     border-bottom: 1px solid rgb(164, 164, 164);
     margin-left: -15px;
     margin-right: -15px;
+    margin-top: -40px;
 }
 
 .user-center-container .navbar-brand{
@@ -218,16 +219,20 @@ body {
     margin-top: 50px;
 }
 
-.user-center-content .img_1{
-    width: 62%;height: 60px;
+.user-center-content .img_1 {
+    width: 60px;height: 60px;
     margin-right: 40px;
     margin-left: 20px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
-.user-center-content .img_2{
+.user-center-content .img_2 {
     height: 60px;
-    width: 80px;
+    width: 60px;
     margin-right: 40px;
+    border-radius: 5px;
 }
 
 .user-center-content label{
@@ -255,6 +260,7 @@ body {
     width: 45%;
     margin-left: 10%;
     margin-top: 40px;
+    border: 1px solid rgb(164, 164 ,164);
 }
 
 .user-center-content li {
@@ -277,12 +283,20 @@ body {
 
 .user-center-container .row span.msg {
     position: absolute;
-    left: 95%;
-    top: 10px;
+    right:8%;
+    top: 40px;
     font-size: 12px;
     color: rgb(244, 92, 66);
-    width: 150px;
     white-space: nowrap;
+    width: 250px;
+    text-align: right;
+}
+
+/*修改提示信息*/
+.user-center-content .row span.msg .fa {
+    position: absolute;
+    left: 105%;
+    top: -32px;
 }
 
 @media (min-width: 768px){
@@ -372,8 +386,8 @@ body {
     }
     .user-center-container .row span.msg {
         position: absolute;
-        left: 95%;
-        top: 37px;
+        right: 28%;
+        top: 70px;
         font-size: 12px;
         color: rgb(244, 92, 66);
         width: 150px;
@@ -381,6 +395,11 @@ body {
     }
     .user-center-container .info-group .col-sm-3 {
         width: 200px;
+    }
+    .user-center-content .row span.msg .fa {
+        position: absolute;
+        left: 145%;
+        top: -32px;
     }
 }
 .user-center-content .submit>.col-sm-8>.btn {
@@ -392,42 +411,10 @@ body {
     padding: 9px 16px;
 }
 
-/*.user-center-content .file {*/
-    /*position: relative;*/
-    /*display: inline-block;*/
-    /*background: white;*/
-    /*border: 1px solid #3DA8F5;*/
-    /*border-radius: 4px;*/
-    /*padding: 4px 12px;*/
-    /*overflow: hidden;*/
-    /*color: #3DA8F5;*/
-    /*text-decoration: none;*/
-    /*text-indent: 0;*/
-    /*line-height: 20px;*/
-    /*margin-top: 15px;*/
-    /*font-size: 16px;*/
-    /*top: 10px;*/
-/*}*/
-
-/*.user-center-content .file input {*/
-    /*position: absolute;*/
-    /*font-size: 100px;*/
-    /*right: 0;*/
-    /*top: 0;*/
-    /*opacity: 0;*/
-/*}*/
-
-/*.user-center-content .file:hover {*/
-    /*background: #3DA8F5;*/
-    /*color: white;*/
-    /*text-decoration: none;*/
-/*}*/
-
 .user-center-content p.loginaccount{
     font-size: 19px;
     font-weight: bold;
 }
-
 
 
 .user-center-content ul li{
@@ -439,21 +426,10 @@ body {
 }
 
 .user-center-content .row {
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 .user-center-content .row {
     position: relative;
-}
-
-
-.user-center-content .row span.msg {
-    position: absolute;
-    left: 95%;
-    top: 10px;
-    font-size: 12px;
-    color: rgb(244, 92, 66);
-    width: 150px;
-    white-space: nowrap;
 }
 
 .user-center-content .row span.msg i {
@@ -467,5 +443,20 @@ body {
 
 .user-center-content .row span.msg i.fa-times-circle {
     color: rgb(244, 92, 66);
+}
+
+.user-center-content .modal-body img {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    margin-right: 30px;
+    margin-left: 8px;
+    margin-top: 10px;
+}
+
+.user-center-content .modal-body img:hover {
+    -moz-box-shadow: 1px 2px 40px 1px #d3d3d3;
+    -webkit-box-shadow: 1px 2px 40px 1px #d3d3d3;
+    box-shadow: 1px 2px 40px 1px #d3d3d3;
 }
 

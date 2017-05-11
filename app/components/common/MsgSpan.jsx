@@ -7,7 +7,7 @@ export default class MsgSpan extends Component {
     render() {
         const { msg, validated } = this.props;
         return (
-            <span className="msg">
+            <span className="msg" title={msg}>
                 {
                     validated && msg &&
                     <i className="fa fa-times-circle" aria-hidden="true"/>
