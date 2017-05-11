@@ -15,9 +15,6 @@ export default class UserCenterContainer extends Component {
 
     componentDidMount() {
         $.get('/api/userCenter/getUserInfo', json => {
-
-            console.log('json: ' + JSON.stringify(json));
-
             if (json.status) {
                 this.setState({ account: json.result })
             } else {
@@ -31,6 +28,15 @@ export default class UserCenterContainer extends Component {
         return () => {
             this.setState({ active: type });
         };
+    };
+
+    handleChangeUserInfo = e =>  {
+        let name = e.target.name;
+        let value = e.target.value;
+
+        let obj = {};
+        obj[name] = value;
+        this.setState({ account: Object.assign(this.state.account, obj) });
     };
 
     render () {
@@ -69,7 +75,8 @@ export default class UserCenterContainer extends Component {
 
                     {
                         this.state.active === 'info' &&
-                        <UserCenterInfo account={ account }/>
+                        <UserCenterInfo account={ account }
+                                        onChangeUserInfo={ this.handleChangeUserInfo } />
                     }
                     {
                         this.state.active === 'account' &&

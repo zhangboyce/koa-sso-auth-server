@@ -13,10 +13,6 @@ export default class UserCenterAccount extends Component {
         this.state = { msg: '', password: '' };
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({ account: nextProps.account });
-    }
-
     handleSave = (savingCallback, savedCallback) => {
         let op = this.refs.oldPassword.validate();
         let np = this.refs.newPassword.validate();

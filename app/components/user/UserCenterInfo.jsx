@@ -1,9 +1,6 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import DatePicker from 'react-datepicker';
-import '../../../public/css/react-datepicker.css';
-import moment from 'moment';
 import RowInput from '../common/RowInput.jsx';
 import RowSubmit from '../common/RowSubmit.jsx';
 
@@ -11,31 +8,11 @@ export default class UserCenterInfo extends Component {
 
     constructor(props) {
         super(props);
-
-        let date = new Date();
-        let firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-        let lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-
-        this.state = {
-            account: { },
-            msg: '',
-            startDate: moment(firstDay),
-            endDate: moment(lastDay)
-        };
+        this.state = { msg: '' };
     }
-
-    componentWillReceiveProps(nextProps) {
-        this.setState({ account: nextProps.account });
-    }
-
 
     handleChange = e =>  {
-        let name = e.target.name;
-        let value = e.target.value;
-
-        let obj = {};
-        obj[name] = value;
-        this.setState({ account: Object.assign(this.state.account, obj) });
+        this.props.onChangeUserInfo(e);
     };
 
 
@@ -48,13 +25,13 @@ export default class UserCenterInfo extends Component {
         if (!nv || !jv || !pv || !bv || !av) return;
 
         savingCallback();
-        let account  = this.state.account;
+        let account  = this.props.account;
         $.post('/api/userCenter/updateUserInfo', { account } , json => {
             savedCallback();
             this.setState({ msg: json.message });
 
             if (json.status) {
-
+                location.href = '/userCenter';
             } else {
 
             }
@@ -63,7 +40,7 @@ export default class UserCenterInfo extends Component {
     };
 
     render () {
-        let account  = this.state.account;
+        let account  = this.props.account;
         return (
             <div className="main_right">
                 <div>
@@ -136,5 +113,6 @@ export default class UserCenterInfo extends Component {
 }
 
 UserCenterInfo.propTypes = {
-    account: PropTypes.object
+    account: PropTypes.object,
+    onChangeUserInfo: PropTypes.func.isRequired
 };
