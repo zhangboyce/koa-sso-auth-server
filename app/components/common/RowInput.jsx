@@ -78,7 +78,7 @@ export default class RowInput extends Component {
             && validateRegex !== '') {
 
             let regex = validateRegex instanceof RegExp ? validateRegex : new RegExp(validateRegex);
-            if (!regex.test(value)) {
+            if (value !== '' && !regex.test(value)) {
                 let msg = validateMsg || '该字段格式不正确!';
                 this.setState({ msg: msg });
                 return false;
@@ -113,16 +113,25 @@ export default class RowInput extends Component {
     };
 
     render() {
-        const { name } = this.props;
+
+        const {
+            name,
+            value,
+            type,
+            label,
+            labelClassName,
+            inputClassName,
+            placeholder } = this.props;
+
         return (
             <div className={ "row " + name }>
                 {
-                    this.props.label &&
-                    <label className={ "control-label " + ( this.props.labelClassName || "col-sm-1" ) }>{ this.props.label }</label>
+                    label &&
+                    <label className={ "control-label " + ( labelClassName || "col-sm-1" ) }>{ label }</label>
                 }
-                <div className={ this.props.inputClassName  || 'col-sm-3'}>
+                <div className={ inputClassName  || 'col-sm-3'}>
                     { this.props.children }
-                    <input name={ name } ref={ name } onBlur={ this.validate } onChange={ this.handleChange } type={ this.props.type || 'text' } className="form-control" placeholder={ this.props.placeholder }/>
+                    <input name={ name } ref={ name } value={ value } onBlur={ this.validate } onChange={ this.handleChange } type={ type || 'text' } className="form-control" placeholder={ placeholder }/>
                 </div>
                 <MsgSpan msg={ this.state.msg } validated={ this.state.validated }/>
             </div>
@@ -133,6 +142,7 @@ export default class RowInput extends Component {
 RowInput.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string,
+    value: PropTypes.string,
     placeholder: PropTypes.string,
     label: PropTypes.string,
     labelClassName: PropTypes.string,

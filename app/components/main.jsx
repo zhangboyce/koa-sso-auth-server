@@ -29,10 +29,7 @@ ReactDOM.render(
                 <Route path="resetPassword" component={ ResetPassword }/>
                 <Route path="resetPasswordOk" component={ ResetPasswordOk }/>
             </Route>
+            <Route path="userCenter" component={ UserCenterContainer } />
         </Route>
-        <Route path="/revise" component={ UserCenterContainer }>
-            <IndexRoute component={ UserCenterInfo }/>
-            <Route path="info" component={ UserCenterInfo }/>
-            <Route path="account" component={ UserCenterAccount }/>
-        </Route>
+
     </Router>, document.getElementById('main'));

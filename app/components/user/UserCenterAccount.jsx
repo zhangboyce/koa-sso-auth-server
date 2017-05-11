@@ -13,23 +13,31 @@ export default class UserCenterAccount extends Component {
         this.state = { msg: '', password: '' };
     }
 
-    handleSave = () => {
+    componentWillReceiveProps(nextProps) {
+        this.setState({ account: nextProps.account });
+    }
+
+    handleSave = (savingCallback, savedCallback) => {
         let op = this.refs.oldPassword.validate();
         let np = this.refs.newPassword.validate();
         let nrp = this.refs.newRePassword.validate();
+        if (!op || !np || !nrp) return;
+
+        savingCallback();
 
         let newPassword = this.refs.newPassword.val;
         let oldPassword = this.refs.oldPassword.val;
 
-        if (!op || !np || !nrp) return;
-
+        let _id = this.props.account._id;
         newPassword = Utils.md5ByString(newPassword + Utils.salt);
         oldPassword = Utils.md5ByString(oldPassword + Utils.salt);
 
-        $.post('/api/user/updateUserInfo', { oldPassword, newPassword }, json => {
+        $.post('/api/userCenter/updatePassword', { _id, oldPassword, newPassword }, json => {
+            savedCallback();
             this.setState({ msg: json.message });
             if (json.status) {
-                location.href="/user/registerOk?email=" + email ;
+                alert('修改成功,请重新登录!');
+                location.href="/user/login" ;
             }
         });
     };
@@ -52,12 +60,12 @@ export default class UserCenterAccount extends Component {
                     <div className="row">
                         <label className="control-label col-sm-3 col-lg-2">邮箱帐号</label>
                         <div className="col-sm-8">
-                            <input className="form-control" type="text" disabled/>
+                            <input className="form-control" type="text" disabled value={ this.props.account.username }/>
                         </div>
                     </div>
                     <hr/>
 
-                    <RowInput ref="oldPassword" name="oldPassword" type="password" isRequired isPassword inputClassName="col-sm-8" labelClassName="col-sm-3" label="旧密码" placeholder="旧密码" />
+                    <RowInput ref="oldPassword" name="oldPassword" type="password" isRequired inputClassName="col-sm-8" labelClassName="col-sm-3" label="旧密码" placeholder="旧密码" />
                     <RowInput ref="newPassword" name="newPassword" type="password" isRequired isPassword onChange={ this.handlePasswordChange } inputClassName="col-sm-8" labelClassName="col-sm-3" label="新密码" placeholder="新密码" />
                     <RowInput ref="newRePassword" name="newRePassword" type="password" isEquals={ this.state.password } inputClassName="col-sm-8" labelClassName="col-sm-3" label="确认新密码" placeholder="确认新密码"/>
 

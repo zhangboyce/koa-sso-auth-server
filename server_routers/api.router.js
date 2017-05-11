@@ -10,6 +10,7 @@ bluebird.promisifyAll(redis.Multi.prototype);
 const client = redis.createClient(config.get('redis'));
 
 const MongoConnection = require('../common/MongoConnection');
+const ObjectID = require('mongodb').ObjectID;
 
 const Utils = require('../common/Utils');
 const EmailUtils = require('../email/EmailUtils');
@@ -290,15 +291,107 @@ router.get('/api/user/valid', function *() {
     }
 });
 
-router.get('/api/user/getUserInfo', function *() {
+router.get('/userCenter', function *() {
+    let token = this.session.token;
+    if (!token) {
+        this.body = '<script>alert("登录已过期, 请重新登录");location.href="/user/login";</script>';
+    }
+    let account = yield client.getAsync('token-' + token);
+    if(!account) {
+        this.body = '<script>alert("登录已过期, 请重新登录");location.href="/user/login";</script>';
+    }
+
+    yield this.render('index');
+});
+
+router.get('/api/userCenter/getUserInfo', function *() {
+    let token = this.session.token;
+    if (!token) {
+        this.body = { status: false, message: 'token已过期, 请重新登录' };
+        return;
+    }
+    let account = yield client.getAsync('token-' + token);
+    if(!account) {
+        this.body = { status: false, message: 'token已过期, 请重新登录' };
+        return;
+    }
+    account = JSON.parse(account);
+
+    let db = MongoConnection.get('boom');
+    account = yield db.collection('accounts').findOne({ _id: new ObjectID(account._id) }, { password: 0, validCode: 0, validDate: 0 });
+
+    this.body = { status: true, result: account };
+});
+
+router.post('/api/userCenter/updateUserInfo', function *() {
+
+    let token = this.session.token;
+    if (!token) {
+        this.body = { status: false, message: 'token已过期, 请重新登录' };
+        return;
+    }
+    let oldAccount = yield client.getAsync('token-' + token);
+    if(!oldAccount) {
+        this.body = { status: false, message: 'token已过期, 请重新登录' };
+        return;
+    }
+    oldAccount = JSON.parse(oldAccount);
+
+    let data = yield parse(this);
+    let account = data.account;
+
+    if (account._id !== oldAccount._id) {
+        this.body = { status: false, message: '用户信息有误,不能修改' };
+        return;
+    }
+
+    let _id = new ObjectID(account._id);
+    delete account.username;
+    delete account._id;
+
+    let db = MongoConnection.get('boom');
+    yield db.collection('accounts').update({ _id:  _id }, { $set:  account });
+    this.body = { status: true };
 
 });
 
-router.post('/api/user/updateUserInfo', function *() {
+router.post('/api/userCenter/updatePassword', function *() {
+    let token = this.session.token;
+    if (!token) {
+        this.body = { status: false, message: 'token已过期, 请重新登录' };
+        return;
+    }
+    let oldAccount = yield client.getAsync('token-' + token);
+    if(!oldAccount) {
+        this.body = { status: false, message: 'token已过期, 请重新登录' };
+        return;
+    }
+    oldAccount = JSON.parse(oldAccount);
 
-});
+    let data = yield parse(this);
+    let _id = data._id;
+    let oldPassword = data.oldPassword;
+    let newPassword = data.newPassword;
 
-router.post('/api/user/updatePassword', function *() {
+    if (_id !== oldAccount._id) {
+        this.body = { status: false, message: '用户信息有误,不能修改' };
+        return;
+    }
+
+    let db = MongoConnection.get('boom');
+    let account = yield db.collection('accounts').findOne({ _id: new ObjectID(_id) });
+    if (account.password !== oldPassword) {
+        this.body = { status: false, message: '输入的旧密码不正确' };
+        return;
+    }
+
+    yield db.collection('accounts').update({ _id:  account._id }, { $set:  { password: newPassword } });
+
+    // logout
+    client.del('token-' + token);
+    this.session = null;
+
+    this.body = { status: true };
 
 });
 

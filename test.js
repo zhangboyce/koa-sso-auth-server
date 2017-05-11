@@ -30,4 +30,8 @@ function _config() {
    console.log('NODE_APP_INSTANCE: ' + config.util.getEnv('NODE_APP_INSTANCE'));
 }
 
-encodePassword();
+//encodePassword();
+
+let regex = /^\d{4}\-(0?[1-9]|1[0-2])(\-(0?[1-9]|[1-2][0-9]|3[0-1]))?$/;
+
+console.log(regex.test('1988-09-10'));

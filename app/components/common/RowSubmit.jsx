@@ -34,12 +34,9 @@ export default class RowSubmit extends Component {
                 <div className={ this.props.btnClassName || "col-sm-3" }>
                     <button type="button" className="btn btn-primary btn-block"
                             onClick={ this.handleClick }
-                            data-loading-text={'<i class="fa fa-spinner fa-spin" />    ' + this.props.loadingName}>{ this.props.name }</button>
+                            data-loading-text={'<i class="fa fa-spinner fa-spin" />    ' + (this.props.loadingName || this.props.name )}>{ this.props.name }</button>
                 </div>
-                {
-                    !this.props.btnClassName &&
-                    <MsgSpan msg={ this.props.msg } validated={ this.state.validated } />
-                }
+                <MsgSpan msg={ this.props.msg } validated={ this.state.validated } />
 
             </div>
         );

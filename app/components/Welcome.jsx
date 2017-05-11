@@ -8,7 +8,13 @@ export default class Welcome extends Component {
         return (
             <div>
                 <h1>Welcome to sso system.</h1>
-                <a href="/api/user/logout">退出</a>
+                <p>
+                    <a href="/userCenter">用户中心</a>
+                </p>
+                <p>
+                    <a href="/api/user/logout">退出</a>
+                </p>
+
             </div>
         );
     }
