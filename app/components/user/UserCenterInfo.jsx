@@ -71,7 +71,7 @@ export default class UserCenterInfo extends Component {
                 </div>
                 <div className="">
                     <div className="form-horizontal info-group" role="form">
-                        <li className="form-group row">
+                        <div className="form-group row">
                             <label className="control-label col-sm-3 col-lg-2 avatar-label">头像</label>
                             <div className="col-sm-8">
                                 <div className="choosefile">
@@ -82,7 +82,7 @@ export default class UserCenterInfo extends Component {
                                 </div>
                             </div>
                             <div className="clear"></div>
-                        </li>
+                        </div>
 
                         <RowInput onChange={ this.handleChange }
                                   ref="nickname"

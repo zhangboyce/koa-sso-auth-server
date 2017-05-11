@@ -168,10 +168,12 @@ body {
     height: 70px;
     line-height: 50px;
     border-bottom: 1px solid rgb(164, 164, 164);
+    margin-left: -15px;
+    margin-right: -15px;
 }
 
 .user-center-container .navbar-brand{
-    font-size: 2rem;
+    font-size: 20px;
 }
 
 .user-center-container .logo{
@@ -187,11 +189,11 @@ body {
 }
 
 .user-center-content h4{
-    font-size: 1.8rem;
+    font-size: 18px;
 }
 
 .user-center-content .des, .user-center-content .emailadress{
-    font-size: 1.4rem;
+    font-size: 14px;
 }
 
 .user-center-content .main_left{
@@ -230,7 +232,7 @@ body {
 
 .user-center-content label{
     color: grey;
-    font-size: 1.5rem;
+    font-size: 15px;
     font-weight: bold;
 }
 
@@ -242,15 +244,15 @@ body {
     font-weight: bold;
     text-align: center;
     height: 50px;
-    font-size: 1.8rem;
+    font-size: 18px;
     line-height: 50px;
     margin-top: 15px;
 }
 
+
 .user-center-content .main_right{
     padding: 20px 30px;
     width: 45%;
-    height: 515px;
     margin-left: 10%;
     margin-top: 40px;
 }
@@ -271,6 +273,16 @@ body {
 
 .user-center-content .form-control{
     height: 35px!important;
+}
+
+.user-center-container .row span.msg {
+    position: absolute;
+    left: 95%;
+    top: 10px;
+    font-size: 12px;
+    color: rgb(244, 92, 66);
+    width: 150px;
+    white-space: nowrap;
 }
 
 @media (min-width: 768px){
@@ -297,23 +309,23 @@ body {
         margin-left: 26%;
     }
     .user-center-content .submit>.col-sm-8 {
-         margin-left: 26%;
-     }
+        margin-left: 26%;
+    }
 }
 
 @media (max-width: 964px){
     .user-center-content label{
-        font-size: 1.4rem;
+        font-size: 14px;
     }
 }
 @media (max-width: 922px){
     .user-center-content label{
-        font-size: 1.3rem;
+        font-size: 13px;
     }
 }
 @media (max-width: 880px){
     .user-center-content label{
-        font-size: 1.2rem;
+        font-size: 12px;
     }
 }
 
@@ -342,7 +354,7 @@ body {
         width: 30%;
     }
     .user-center-content label{
-        font-size: 1.5rem;
+        font-size: 15px;
     }
     .user-center-content .submit>.col-sm-8 {
         margin-left: 30%;
@@ -357,6 +369,18 @@ body {
     }
     .user-center-content .submit>.col-sm-8 {
         margin-left: 0;
+    }
+    .user-center-container .row span.msg {
+        position: absolute;
+        left: 95%;
+        top: 37px;
+        font-size: 12px;
+        color: rgb(244, 92, 66);
+        width: 150px;
+        white-space: nowrap;
+    }
+    .user-center-container .info-group .col-sm-3 {
+        width: 200px;
     }
 }
 .user-center-content .submit>.col-sm-8>.btn {
@@ -381,7 +405,7 @@ body {
     text-indent: 0;
     line-height: 20px;
     margin-top: 15px;
-    font-size: 1.6rem;
+    font-size: 16px;
     top: 10px;
 }
 
@@ -405,6 +429,7 @@ body {
 }
 
 
+
 .user-center-content ul li{
     position: relative;
 }
@@ -419,6 +444,7 @@ body {
 .user-center-content .row {
     position: relative;
 }
+
 
 .user-center-content .row span.msg {
     position: absolute;
@@ -442,3 +468,4 @@ body {
 .user-center-content .row span.msg i.fa-times-circle {
     color: rgb(244, 92, 66);
 }
+
