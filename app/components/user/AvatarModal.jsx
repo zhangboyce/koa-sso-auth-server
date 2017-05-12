@@ -17,7 +17,7 @@ export default class AvatarModal extends Component {
         let avatarComps = avatars.map(avatar => {
             return (
                 <a href="javascript:;" key={ avatar } onClick={ this.handleSubmitAvatar(avatar) }>
-                    <img className="img-1"  src={ window.STATIC_SERVER + 'boom/imgs/avatars/' + avatar } />
+                    <img  src={ window.STATIC_SERVER + 'boom/imgs/avatars/' + avatar } />
                 </a>
             );
         });

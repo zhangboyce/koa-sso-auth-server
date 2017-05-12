@@ -52,7 +52,6 @@ export default class UserCenterAccount extends Component {
                 </div>
                 <hr />
                 <div className="form-horizontal info-group">
-
                     <div className="row">
                         <label className="control-label col-sm-3 col-lg-2">邮箱帐号</label>
                         <div className="col-sm-8">
