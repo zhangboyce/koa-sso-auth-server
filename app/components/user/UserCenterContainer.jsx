@@ -1,4 +1,8 @@
-'use strict';
+https://git.coding.net/boyce_zhang/cce-ato-sso.git
+
+
+
+    'use strict';
 
 import React, { Component } from 'react';
 import { Link } from 'react-router';
@@ -68,30 +72,31 @@ export default class UserCenterContainer extends Component {
 
                             <div>
                                 <h4>{ account.nickname }</h4>
-                                <p className="emailadress">{ account.username }</p>
+                                <p className="emailaddress">{ account.username }</p>
                             </div>
                         </div>
                         <div className="menus">
-                            <section className="border col-sm-12" >
-                                <a href="javascript:void(0)" onClick={ this.handleSwitch('info') }>个人信息</a>
-                            </section>
-                            <div className="border col-sm-12">
-                                <a href="javascript:void(0)" onClick={ this.handleSwitch('account') }>帐号密码</a>
-                            </div>
+                            <Link to="/userCenter/info">
+                                <section className="border col-sm-12" onClick={ this.handleSwitch('info') }>
+                                    <span  >个人信息</span>
+                                </section>
+                            </Link>
+                            <Link to="/userCenter/account" >
+                                <div className="border col-sm-12" onClick={ this.handleSwitch('account') }>
+                                    <span >帐号密码</span>
+                                </div>
+                            </Link>
                         </div>
                     </div>
 
-                    {
-                        this.state.active === 'info' &&
-                        <UserCenterInfo account={ account }
-                                        onSubmitAvatar={ this.handleSubmitAvatar }
-                                        onChangeUserInfo={ this.handleChangeUserInfo } />
-                    }
-                    {
-                        this.state.active === 'account' &&
-                        <UserCenterAccount account = { account }/>
-                    }
 
+
+
+                    {this.props.children && React.cloneElement(this.props.children, {
+                        account: account,
+                        onSubmitAvatar:this.handleSubmitAvatar,
+                        onChangeUserInfo:this.handleChangeUserInfo
+                    })}
                 </div>
             </div>
 

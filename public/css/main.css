@@ -19,6 +19,7 @@ body {
     margin: 36px -14px 0 -14px ;
     width: 100%;
     position: absolute;
+    left: 0;
     text-align: center;
 }
 
@@ -193,7 +194,7 @@ body {
     font-size: 18px;
 }
 
-.user-center-content .des, .user-center-content .emailadress{
+.user-center-content .des, .user-center-content .emailaddress{
     font-size: 14px;
 }
 

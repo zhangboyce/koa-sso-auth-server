@@ -55,7 +55,7 @@ export default class UserCenterInfo extends Component {
                         <div className="form-group row">
                             <label className="control-label col-sm-3 col-lg-2 avatar-label">头像</label>
                             <div className="col-sm-8">
-                                <div className="choosefile">
+                                <div>
                                     <img data-toggle="modal" data-target="#avatarModal" className="img_2 img-circle" src={ window.STATIC_SERVER + 'boom/imgs/avatars/' + (account.avatar || '01.png')  } />
                                     <a href="javascript:;" data-toggle="modal" data-target="#avatarModal" >更换头像</a>
                                     <AvatarModal onSubmitAvatar={ this.handleSubmitAvatar }/>
