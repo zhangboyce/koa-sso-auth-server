@@ -1,8 +1,4 @@
-https://git.coding.net/boyce_zhang/cce-ato-sso.git
-
-
-
-    'use strict';
+'use strict';
 
 import React, { Component } from 'react';
 import { Link } from 'react-router';
